@@ -1,0 +1,10 @@
+/Users/pierpaolobettoni/Code/clean_aspnet_mvc/bin/Debug/netcoreapp1.1/clean_aspnet_mvc.db
+/Users/pierpaolobettoni/Code/clean_aspnet_mvc/bin/Debug/netcoreapp1.1/clean_aspnet_mvc.deps.json
+/Users/pierpaolobettoni/Code/clean_aspnet_mvc/bin/Debug/netcoreapp1.1/clean_aspnet_mvc.runtimeconfig.json
+/Users/pierpaolobettoni/Code/clean_aspnet_mvc/bin/Debug/netcoreapp1.1/clean_aspnet_mvc.runtimeconfig.dev.json
+/Users/pierpaolobettoni/Code/clean_aspnet_mvc/bin/Debug/netcoreapp1.1/clean_aspnet_mvc.dll
+/Users/pierpaolobettoni/Code/clean_aspnet_mvc/bin/Debug/netcoreapp1.1/clean_aspnet_mvc.pdb
+/Users/pierpaolobettoni/Code/clean_aspnet_mvc/obj/Debug/netcoreapp1.1/UserSecretsAssemblyInfo.cs
+/Users/pierpaolobettoni/Code/clean_aspnet_mvc/obj/Debug/netcoreapp1.1/clean_aspnet_mvc.AssemblyInfo.cs
+/Users/pierpaolobettoni/Code/clean_aspnet_mvc/obj/Debug/netcoreapp1.1/clean_aspnet_mvc.dll
+/Users/pierpaolobettoni/Code/clean_aspnet_mvc/obj/Debug/netcoreapp1.1/clean_aspnet_mvc.pdb
