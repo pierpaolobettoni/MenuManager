@@ -53,4 +53,32 @@ public class CurrentLoggedInUser
         }
         return retValue;
     }
+
+    public List<MealItem> GetMealItems()
+    {
+        return  _dbContext.MealItems
+        .Where(e => e.Location == GetCurrentLocation())
+        .ToList<MealItem>();
+    }
+
+    public List<GroceryItem> GetGroceryItems()
+    {
+        return  _dbContext.GroceryItems
+        .Where(e => e.Location == GetCurrentLocation())
+        .ToList();
+    }
+
+    public List<GroceryCategory> GetGroceryCategory()
+    {
+        return  _dbContext.GroceryCategory
+        .Where(e => e.Location == GetCurrentLocation())
+        .ToList();
+    }
+
+    public List<MealItemIngredient> GetMealItemIngredients()
+    {
+        return  _dbContext.MealItemIngredients
+        .Where(e => e.Location == GetCurrentLocation())
+        .ToList();
+    }
 }

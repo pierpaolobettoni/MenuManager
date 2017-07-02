@@ -22,4 +22,9 @@ namespace clean_aspnet_mvc.Data
 
         public ICollection<UserLocations> UserLocations { get; set; }
     }
+
+    public class BaseEntityChildOfLocation
+    {
+        public virtual Locations Location {get; set;}
+    }
 }

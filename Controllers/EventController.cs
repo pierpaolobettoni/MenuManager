@@ -56,7 +56,7 @@ namespace clean_aspnet_mvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,EventName,StartDate,EndDate, EventTypeId")] Event @event)
+        public async Task<IActionResult> Create([Bind("Id,EventName,StartDate,EndDate, EventTypeId, EventDescription")] Event @event)
         {
             ViewBag.EventTypes = GetLoggedInUser().GetEventTypes();
             @event.Location = base.GetLoggedInUser().GetCurrentLocation();
@@ -92,7 +92,7 @@ namespace clean_aspnet_mvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,EventName,StartDate,EndDate,EventTypeId")] Event @event)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,EventName,StartDate,EndDate,EventTypeId, EventDescription")] Event @event)
         {
             ViewBag.EventTypes = GetLoggedInUser().GetEventTypes();
             @event.Location = base.GetLoggedInUser().GetCurrentLocation();

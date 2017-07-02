@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
@@ -21,6 +22,8 @@ namespace clean_aspnet_mvc.Data
 
         [Required]
         public string EventName { get; set; }
+        [DataType(DataType.MultilineText)]
+        public string EventDescription {get;set;}
         [Required]
         [Column(TypeName = "Date")]
         [DataType(DataType.DateTime)]
@@ -35,6 +38,7 @@ namespace clean_aspnet_mvc.Data
         public int EventTypeId { get; set; }
 
         public virtual EventType EventType { get; set; }
+
         [Required]
         public virtual Locations Location { get; set; }
 
@@ -51,5 +55,7 @@ namespace clean_aspnet_mvc.Data
         public string EventTypeName { get; set; }
         [Required]
         public Locations Location { get; set; }
+
+        public virtual ICollection<Event> Events {get; set;}
     }
 }

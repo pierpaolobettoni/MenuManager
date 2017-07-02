@@ -1,6 +1,6 @@
 // Sample command to scaffold a controller and its views based on a EF table
 
-dotnet aspnet-codegenerator --project . controller -name LocationsController -m Locations -dc ApplicationDbContext -outDir Controllers/
+dotnet aspnet-codegenerator --project . controller -name MealItemIngredientController -m MealItemIngredient -dc ApplicationDbContext -outDir Controllers/
 
 // sample command to create a migration
 dotnet ef migrations add 'Initial Migration'

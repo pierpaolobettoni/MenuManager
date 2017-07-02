@@ -8,23 +8,18 @@
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
-        @* Added for JQueryUI (Debug) *@
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-        @* Added for JQueryUI (Debug) *@
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
     </environment>
 </head>
 <body>
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -40,7 +35,14 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
 
+  <li><a asp-area="" asp-controller="Event" asp-action="Index">Events</a></li>
+  <li><a asp-area="" asp-controller="EventType" asp-action="Index">Event Types</a></li>
+  <li><a asp-area="" asp-controller="GroceryCategory" asp-action="Index">Grocery Catogory</a></li>
+  <li><a asp-area="" asp-controller="GroceryItem" asp-action="Index">Grocery Item</a></li>
+
   <li><a asp-area="" asp-controller="Locations" asp-action="Index">Locations</a></li>
+  <li><a asp-area="" asp-controller="MealItem" asp-action="Index">Meal Items</a></li>
+
 
 
                 </ul>
@@ -49,6 +51,7 @@
         </div>
     </nav>
     <div class="container body-content">
+      <br>
         @RenderBody()
         <hr />
         <footer>
@@ -57,9 +60,16 @@
     </div>
 
     <environment names="Development">
+       <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
     </environment>
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -78,5 +88,6 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+<script src="~/js/datePickerReady.js"></script>
 </body>
 </html>

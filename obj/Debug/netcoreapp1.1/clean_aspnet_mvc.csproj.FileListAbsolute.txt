@@ -8,3 +8,5 @@
 /Users/pierpaolobettoni/Code/clean_aspnet_mvc/obj/Debug/netcoreapp1.1/clean_aspnet_mvc.AssemblyInfo.cs
 /Users/pierpaolobettoni/Code/clean_aspnet_mvc/obj/Debug/netcoreapp1.1/clean_aspnet_mvc.dll
 /Users/pierpaolobettoni/Code/clean_aspnet_mvc/obj/Debug/netcoreapp1.1/clean_aspnet_mvc.pdb
+/Users/pierpaolobettoni/Code/clean_aspnet_mvc/obj/Debug/netcoreapp1.1/clean_aspnet_mvc.csproj.CoreCompileInputs.cache
+/Users/pierpaolobettoni/Code/clean_aspnet_mvc/obj/Debug/netcoreapp1.1/clean_aspnet_mvc.AssemblyInfoInputs.cache

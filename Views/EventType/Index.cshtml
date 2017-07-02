@@ -2,6 +2,12 @@
 
 
 
+<h4>Event Types</h4>
+<p>
+Manage your event types here so that every time you create an event you can specify what type it is.
+
+For example, you might want to create the following event types: "Pioneer Meeting", "Elder's Meeting" etc.
+</p>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -22,7 +28,6 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
