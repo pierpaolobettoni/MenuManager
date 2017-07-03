@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 namespace clean_aspnet_mvc.Data
 {
 
-    public class Event
+    public class Event : BaseEntityChildOfLocation
     {
         public Event()
         {
@@ -17,7 +17,6 @@ namespace clean_aspnet_mvc.Data
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-
         public int Id { get; set; }
 
         [Required]
@@ -39,23 +38,27 @@ namespace clean_aspnet_mvc.Data
 
         public virtual EventType EventType { get; set; }
 
-        [Required]
-        public virtual Locations Location { get; set; }
+
 
     }
 
-    public class EventType
+    public class EventType : BaseEntityChildOfLocation
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-
         public int Id { get; set; }
 
         [Required]
         public string EventTypeName { get; set; }
-        [Required]
-        public Locations Location { get; set; }
 
         public virtual ICollection<Event> Events {get; set;}
+    }
+
+    public class EventMealSlotType : BaseEntityChildOfLocation
+    {
+            [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
+        public int Id { get; set; }
     }
 }
