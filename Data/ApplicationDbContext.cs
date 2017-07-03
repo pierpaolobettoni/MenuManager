@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using clean_aspnet_mvc.Models;
 using clean_aspnet_mvc.Models.MenuManagerViewModels;
+using clean_aspnet_mvc.Data;
 
 namespace clean_aspnet_mvc.Data
 {
@@ -25,6 +26,8 @@ namespace clean_aspnet_mvc.Data
 
 
         }
+
+        public DbSet<clean_aspnet_mvc.Data.EventMealSlotType> EventMealSlotType { get; set; }
 
     }
 }

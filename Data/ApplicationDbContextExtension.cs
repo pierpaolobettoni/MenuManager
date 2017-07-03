@@ -25,6 +25,8 @@ namespace clean_aspnet_mvc.Data
 
         public virtual DbSet<GroceryCategory> GroceryCategory { get; set; }
 
+        public virtual DbSet<EventMealSlotType> EventMealSlotTypes { get; set; }
+
         public override int SaveChanges()
         {
 
@@ -44,15 +46,22 @@ namespace clean_aspnet_mvc.Data
             return await base.SaveChangesAsync();
         }
 
+        public async Task<int> SaveChangesAsync()
+        {
+            AddLocation(null);
+            return await base.SaveChangesAsync();
+        }
+
         private void AddLocation(Locations location)
         {
             var entities = ChangeTracker.Entries().Where(x => x.Entity is BaseEntityChildOfLocation && (x.State == EntityState.Added || x.State == EntityState.Modified));
 
             foreach (var entity in entities)
             {
+                var entityType = entity.Entity.GetType().FullName;
                 if (location == null)
                 {
-                    throw new ArgumentNullException(@"Trying to save {entity.Entity.GetType()} but there's no location passed in");
+                    throw new ArgumentNullException(string.Format("Trying to save {0} but there's no location passed in", entityType));
                 }
                 if (entity.State == EntityState.Added)
                 {
