@@ -1,0 +1,41 @@
+@model clean_aspnet_mvc.Data.Event
+<div class="panel panel-default">
+  <div class="panel-heading">Event meals</div>
+  <div class="panel-body">
+
+    <button type="button" class="btn btn-default btn-sm">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a meal
+    </button>
+@if (Model.Meals == null) {
+      <div class="alert alert-info">There are currently no meals scheduled for this event.</div>
+    }
+  </div>
+
+
+        @if (Model.Meals != null) {
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Meals</th>
+                </tr>
+            </thead>
+            <tbody>
+              @foreach (var item in Model.Meals) {
+                        <tr>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                }
+
+            </tbody>
+            }
+        </table>
+        }
+
+
+
+</div>

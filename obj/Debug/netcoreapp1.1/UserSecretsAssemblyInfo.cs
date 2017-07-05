@@ -3,4 +3,4 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-clean_aspnet_mvc-E6588AE8-335C-45E0-A288-49BE997837D8")]
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("CONNECTION_STRING")]

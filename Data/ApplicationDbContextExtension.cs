@@ -27,6 +27,12 @@ namespace clean_aspnet_mvc.Data
 
         public virtual DbSet<EventMealSlotType> EventMealSlotTypes { get; set; }
 
+        public virtual DbSet<EventMeal> EventMeal { get; set; }
+
+        public virtual DbSet<Menu> Menus { get; set; }
+
+         public virtual DbSet<MenuMealItem> MenuMealItem { get; set; }
+
         public override int SaveChanges()
         {
 

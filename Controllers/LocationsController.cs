@@ -9,11 +9,12 @@ using clean_aspnet_mvc.Data;
 
 namespace clean_aspnet_mvc.Controllers
 {
-    public class LocationsController : Controller
+    public class LocationsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
         public LocationsController(ApplicationDbContext context)
+        : base(context)
         {
             _context = context;
         }

@@ -60,7 +60,7 @@ namespace clean_aspnet_mvc.Controllers
             if (ModelState.IsValid)
             {
                 DBContext.Add(eventType);
-                await DBContext.SaveChangesAsync();
+                await DBContext.SaveChangesAsync(base.GetLoggedInUser().GetCurrentLocation());
                 return RedirectToAction("Index");
             }
             return View(eventType);

@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-
-
+using System.Collections;
+using clean_aspnet_mvc.Models.EmptyAccountModels;
 
 public class CurrentLoggedInUser
 {
@@ -36,6 +36,13 @@ public class CurrentLoggedInUser
         .FirstOrDefault();
     }
 
+    public ICollection<Locations> GetCurrentLocations()
+    {
+        return _dbContext.UserLocations
+        .Where(l => l.UserName == UserName() && l.IsDefaultLocationForUser == true)
+        .Select(l => l.Location).ToList();
+    }
+
     public async Task<List<Event>> GetEvents()
     {
         return await _dbContext.Events
@@ -47,7 +54,7 @@ public class CurrentLoggedInUser
     {
         var retValue = new List<EventType>();
         var currentLocation = GetCurrentLocation();
-        if (currentLocation!= null)
+        if (currentLocation != null)
         {
             retValue = _dbContext.EventTypes.Where(x => x.Location == GetCurrentLocation()).ToList();
         }
@@ -56,29 +63,61 @@ public class CurrentLoggedInUser
 
     public List<MealItem> GetMealItems()
     {
-        return  _dbContext.MealItems
+        return _dbContext.MealItems
         .Where(e => e.Location == GetCurrentLocation())
         .ToList<MealItem>();
     }
 
     public List<GroceryItem> GetGroceryItems()
     {
-        return  _dbContext.GroceryItems
+        return _dbContext.GroceryItems
         .Where(e => e.Location == GetCurrentLocation())
         .ToList();
     }
 
     public List<GroceryCategory> GetGroceryCategory()
     {
-        return  _dbContext.GroceryCategory
+        return _dbContext.GroceryCategory
         .Where(e => e.Location == GetCurrentLocation())
         .ToList();
     }
 
     public List<MealItemIngredient> GetMealItemIngredients()
     {
-        return  _dbContext.MealItemIngredients
+        return _dbContext.MealItemIngredients
         .Where(e => e.Location == GetCurrentLocation())
         .ToList();
+    }
+
+    public List<MissingStep> GetMissingSteps()
+    {
+        List<MissingStep> retList = new List<MissingStep>();
+        if (GetCurrentLocation() == null)
+        {
+            var step = new MissingStep();
+            step.Name = "Please enter at least one location";
+            step.RedirectToUrl = "/Locations";
+            retList.Add(step);
+        }
+        else
+        {
+            retList = AddMisttingStepIfCollectionIsEmpty(GetEventTypes(), "Please enter the event types", "/EventType", retList);
+            retList = AddMisttingStepIfCollectionIsEmpty(GetGroceryCategory(), "There are no Grocery Types", "/GroceryType", retList);
+        }
+        return retList;
+    }
+
+    private List<MissingStep> AddMisttingStepIfCollectionIsEmpty(ICollection collection, string message, string redirectTo, List<MissingStep> resultList)
+    {
+
+        if (collection == null || collection.Count == 0)
+        {
+            var step = new MissingStep();
+            step.Name = message;
+            step.RedirectToUrl = redirectTo;
+            resultList.Add(step);
+        }
+        return resultList;
+
     }
 }

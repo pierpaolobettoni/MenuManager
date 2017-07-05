@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using clean_aspnet_mvc.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace clean_aspnet_mvc.Controllers
 {
+
     public class EventController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -97,6 +99,7 @@ namespace clean_aspnet_mvc.Controllers
             ViewBag.EventTypes = GetLoggedInUser().GetEventTypes();
             @event.Location = base.GetLoggedInUser().GetCurrentLocation();
             ModelState.Remove("Location");
+
             if (id != @event.Id)
             {
                 return NotFound();

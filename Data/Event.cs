@@ -38,6 +38,8 @@ namespace clean_aspnet_mvc.Data
 
         public virtual EventType EventType { get; set; }
 
+        public virtual ICollection<EventMeal> Meals {get; set;}
+
 
 
     }

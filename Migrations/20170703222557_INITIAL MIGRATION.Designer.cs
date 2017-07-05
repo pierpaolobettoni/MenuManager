@@ -8,8 +8,8 @@ using clean_aspnet_mvc.Data;
 namespace clean_aspnet_mvc.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170701164923_Added Event.Description")]
-    partial class AddedEventDescription
+    [Migration("20170703222557_INITIAL MIGRATION")]
+    partial class INITIALMIGRATION
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,7 +31,7 @@ namespace clean_aspnet_mvc.Migrations
 
                     b.Property<int>("EventTypeId");
 
-                    b.Property<int>("LocationId");
+                    b.Property<int?>("LocationId");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("Date");
@@ -45,6 +45,45 @@ namespace clean_aspnet_mvc.Migrations
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("clean_aspnet_mvc.Data.EventMeal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("EventId");
+
+                    b.Property<int>("EventMealSlotId");
+
+                    b.Property<int?>("LocationId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("EventMealSlotId");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("EventMeal");
+                });
+
+            modelBuilder.Entity("clean_aspnet_mvc.Data.EventMealSlotType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("LocationId");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("EventMealSlotType");
+                });
+
             modelBuilder.Entity("clean_aspnet_mvc.Data.EventType", b =>
                 {
                     b.Property<int>("Id")
@@ -53,7 +92,7 @@ namespace clean_aspnet_mvc.Migrations
                     b.Property<string>("EventTypeName")
                         .IsRequired();
 
-                    b.Property<int>("LocationId");
+                    b.Property<int?>("LocationId");
 
                     b.HasKey("Id");
 
@@ -75,6 +114,41 @@ namespace clean_aspnet_mvc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Locations");
+                });
+
+            modelBuilder.Entity("clean_aspnet_mvc.Data.Menu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("LocationId");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("Menus");
+                });
+
+            modelBuilder.Entity("clean_aspnet_mvc.Data.MenuMealItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("LocationId");
+
+                    b.Property<int>("MealItemId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("MealItemId");
+
+                    b.ToTable("MenuMealItem");
                 });
 
             modelBuilder.Entity("clean_aspnet_mvc.Data.UserLocations", b =>
@@ -143,6 +217,91 @@ namespace clean_aspnet_mvc.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("GroceryCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("GroceryCategoryDescription");
+
+                    b.Property<string>("GroceryCategoryName")
+                        .IsRequired();
+
+                    b.Property<int?>("LocationId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("GroceryCategory");
+                });
+
+            modelBuilder.Entity("GroceryItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("GroceryItemName")
+                        .IsRequired();
+
+                    b.Property<int?>("LocationId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("GroceryItems");
+                });
+
+            modelBuilder.Entity("MealItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("LocationId");
+
+                    b.Property<string>("MealItemDescription");
+
+                    b.Property<string>("MealItemName")
+                        .IsRequired();
+
+                    b.Property<string>("MeasureType");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("MealItems");
+                });
+
+            modelBuilder.Entity("MealItemIngredient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("GroceryItemId");
+
+                    b.Property<int?>("LocationId");
+
+                    b.Property<int>("MealItemId");
+
+                    b.Property<string>("MeasureType");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroceryItemId");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("MealItemId");
+
+                    b.ToTable("MealItemIngredients");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
@@ -255,21 +414,62 @@ namespace clean_aspnet_mvc.Migrations
             modelBuilder.Entity("clean_aspnet_mvc.Data.Event", b =>
                 {
                     b.HasOne("clean_aspnet_mvc.Data.EventType", "EventType")
-                        .WithMany()
+                        .WithMany("Events")
                         .HasForeignKey("EventTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
                         .WithMany()
-                        .HasForeignKey("LocationId")
+                        .HasForeignKey("LocationId");
+                });
+
+            modelBuilder.Entity("clean_aspnet_mvc.Data.EventMeal", b =>
+                {
+                    b.HasOne("clean_aspnet_mvc.Data.Event", "Event")
+                        .WithMany("Meals")
+                        .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("clean_aspnet_mvc.Data.EventMealSlotType", "EventMealSlot")
+                        .WithMany()
+                        .HasForeignKey("EventMealSlotId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+                });
+
+            modelBuilder.Entity("clean_aspnet_mvc.Data.EventMealSlotType", b =>
+                {
+                    b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
                 });
 
             modelBuilder.Entity("clean_aspnet_mvc.Data.EventType", b =>
                 {
                     b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
                         .WithMany()
-                        .HasForeignKey("LocationId")
+                        .HasForeignKey("LocationId");
+                });
+
+            modelBuilder.Entity("clean_aspnet_mvc.Data.Menu", b =>
+                {
+                    b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+                });
+
+            modelBuilder.Entity("clean_aspnet_mvc.Data.MenuMealItem", b =>
+                {
+                    b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+
+                    b.HasOne("MealItem", "MealItem")
+                        .WithMany()
+                        .HasForeignKey("MealItemId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -278,6 +478,44 @@ namespace clean_aspnet_mvc.Migrations
                     b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
                         .WithMany("UserLocations")
                         .HasForeignKey("LocationId");
+                });
+
+            modelBuilder.Entity("GroceryCategory", b =>
+                {
+                    b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+                });
+
+            modelBuilder.Entity("GroceryItem", b =>
+                {
+                    b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+                });
+
+            modelBuilder.Entity("MealItem", b =>
+                {
+                    b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+                });
+
+            modelBuilder.Entity("MealItemIngredient", b =>
+                {
+                    b.HasOne("GroceryItem", "GroceryItem")
+                        .WithMany()
+                        .HasForeignKey("GroceryItemId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+
+                    b.HasOne("MealItem", "MealItem")
+                        .WithMany()
+                        .HasForeignKey("MealItemId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

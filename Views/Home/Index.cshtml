@@ -1,15 +1,37 @@
-﻿@{
+﻿@model List<clean_aspnet_mvc.Models.EmptyAccountModels.MissingStep>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div>
-  <p>
-    <h1>Welcome to menu manager</h1>
-
-    <h3>We are still in beta... so please be patient :-)</h3>
 
 
+@if (Model.Count > 0)
+{
+  <div class="jumbotron">
+  <h1>Welcome!</h1>
+  <p>Seems like you are new here... lets get you started...</p>
+
+  <p>To get you up an running we have to start by setting up the system with a few things. We will walk through a few items. Come back to the home page every time you want to setup more.</p>
+
+</div>
+}
+
+  @foreach(var missingStep in Model) {
+    <div class="alert alert-info" role="alert">
+      @missingStep.Name
+
+      <button type="button" class="btn btn-default">
+        <a href=@missingStep.RedirectToUrl >ok, let's do it...</a>
+      </button>
+
+    </div>
 
 
-  </p>
+  }
+
+
+
+
 </div>

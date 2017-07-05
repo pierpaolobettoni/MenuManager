@@ -1,8 +1,11 @@
 using clean_aspnet_mvc.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+ [Authorize]
 public class ControllerBase : Controller
 {
+
+
     private CurrentLoggedInUser _currentLoggedInuser;
 
     protected ApplicationDbContext DBContext {get; private set;}

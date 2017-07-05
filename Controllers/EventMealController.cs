@@ -9,23 +9,23 @@ using clean_aspnet_mvc.Data;
 
 namespace clean_aspnet_mvc.Controllers
 {
-    public class GroceryItemController : ControllerBase
+    public class EventMealController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public GroceryItemController(ApplicationDbContext context)
+        public EventMealController(ApplicationDbContext context)
         : base(context)
         {
             _context = context;
         }
 
-        // GET: GroceryItem
+        // GET: EventMeal
         public async Task<IActionResult> Index()
         {
-            return View(await _context.GroceryItems.ToListAsync());
+            return View(await _context.EventMeal.ToListAsync());
         }
 
-        // GET: GroceryItem/Details/5
+        // GET: EventMeal/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,44 @@ namespace clean_aspnet_mvc.Controllers
                 return NotFound();
             }
 
-            var groceryItem = await _context.GroceryItems
+            var eventMeal = await _context.EventMeal
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (groceryItem == null)
+            if (eventMeal == null)
             {
                 return NotFound();
             }
 
-            return View(groceryItem);
+            return View(eventMeal);
         }
 
-        // GET: GroceryItem/Create
+        // GET: EventMeal/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: GroceryItem/Create
+        public IActionResult CreateForEvent(int eventId)
+        {
+            return View();
+        }
+
+        // POST: EventMeal/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,GroceryItemName")] GroceryItem groceryItem)
+        public async Task<IActionResult> Create([Bind("Id")] EventMeal eventMeal)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(groceryItem);
+                _context.Add(eventMeal);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(groceryItem);
+            return View(eventMeal);
         }
 
-        // GET: GroceryItem/Edit/5
+        // GET: EventMeal/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +78,22 @@ namespace clean_aspnet_mvc.Controllers
                 return NotFound();
             }
 
-            var groceryItem = await _context.GroceryItems.SingleOrDefaultAsync(m => m.Id == id);
-            if (groceryItem == null)
+            var eventMeal = await _context.EventMeal.SingleOrDefaultAsync(m => m.Id == id);
+            if (eventMeal == null)
             {
                 return NotFound();
             }
-            return View(groceryItem);
+            return View(eventMeal);
         }
 
-        // POST: GroceryItem/Edit/5
+        // POST: EventMeal/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,GroceryItemName")] GroceryItem groceryItem)
+        public async Task<IActionResult> Edit(int id, [Bind("Id")] EventMeal eventMeal)
         {
-            if (id != groceryItem.Id)
+            if (id != eventMeal.Id)
             {
                 return NotFound();
             }
@@ -97,12 +102,12 @@ namespace clean_aspnet_mvc.Controllers
             {
                 try
                 {
-                    _context.Update(groceryItem);
+                    _context.Update(eventMeal);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GroceryItemExists(groceryItem.Id))
+                    if (!EventMealExists(eventMeal.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +118,10 @@ namespace clean_aspnet_mvc.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            return View(groceryItem);
+            return View(eventMeal);
         }
 
-        // GET: GroceryItem/Delete/5
+        // GET: EventMeal/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +129,30 @@ namespace clean_aspnet_mvc.Controllers
                 return NotFound();
             }
 
-            var groceryItem = await _context.GroceryItems
+            var eventMeal = await _context.EventMeal
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (groceryItem == null)
+            if (eventMeal == null)
             {
                 return NotFound();
             }
 
-            return View(groceryItem);
+            return View(eventMeal);
         }
 
-        // POST: GroceryItem/Delete/5
+        // POST: EventMeal/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var groceryItem = await _context.GroceryItems.SingleOrDefaultAsync(m => m.Id == id);
-            _context.GroceryItems.Remove(groceryItem);
+            var eventMeal = await _context.EventMeal.SingleOrDefaultAsync(m => m.Id == id);
+            _context.EventMeal.Remove(eventMeal);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
-        private bool GroceryItemExists(int id)
+        private bool EventMealExists(int id)
         {
-            return _context.GroceryItems.Any(e => e.Id == id);
+            return _context.EventMeal.Any(e => e.Id == id);
         }
     }
 }

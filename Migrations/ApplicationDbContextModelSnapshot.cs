@@ -44,6 +44,28 @@ namespace clean_aspnet_mvc.Migrations
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("clean_aspnet_mvc.Data.EventMeal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("EventId");
+
+                    b.Property<int>("EventMealSlotId");
+
+                    b.Property<int?>("LocationId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("EventMealSlotId");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("EventMeal");
+                });
+
             modelBuilder.Entity("clean_aspnet_mvc.Data.EventMealSlotType", b =>
                 {
                     b.Property<int>("Id")
@@ -91,6 +113,41 @@ namespace clean_aspnet_mvc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Locations");
+                });
+
+            modelBuilder.Entity("clean_aspnet_mvc.Data.Menu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("LocationId");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("Menus");
+                });
+
+            modelBuilder.Entity("clean_aspnet_mvc.Data.MenuMealItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("LocationId");
+
+                    b.Property<int>("MealItemId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("MealItemId");
+
+                    b.ToTable("MenuMealItem");
                 });
 
             modelBuilder.Entity("clean_aspnet_mvc.Data.UserLocations", b =>
@@ -365,6 +422,23 @@ namespace clean_aspnet_mvc.Migrations
                         .HasForeignKey("LocationId");
                 });
 
+            modelBuilder.Entity("clean_aspnet_mvc.Data.EventMeal", b =>
+                {
+                    b.HasOne("clean_aspnet_mvc.Data.Event", "Event")
+                        .WithMany("Meals")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("clean_aspnet_mvc.Data.EventMealSlotType", "EventMealSlot")
+                        .WithMany()
+                        .HasForeignKey("EventMealSlotId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+                });
+
             modelBuilder.Entity("clean_aspnet_mvc.Data.EventMealSlotType", b =>
                 {
                     b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
@@ -377,6 +451,25 @@ namespace clean_aspnet_mvc.Migrations
                     b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId");
+                });
+
+            modelBuilder.Entity("clean_aspnet_mvc.Data.Menu", b =>
+                {
+                    b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+                });
+
+            modelBuilder.Entity("clean_aspnet_mvc.Data.MenuMealItem", b =>
+                {
+                    b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+
+                    b.HasOne("MealItem", "MealItem")
+                        .WithMany()
+                        .HasForeignKey("MealItemId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("clean_aspnet_mvc.Data.UserLocations", b =>

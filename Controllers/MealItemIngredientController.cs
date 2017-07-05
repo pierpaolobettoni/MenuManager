@@ -9,13 +9,14 @@ using clean_aspnet_mvc.Data;
 
 namespace clean_aspnet_mvc.Controllers
 {
-    public class MealItemIngredientController : Controller
+    public class MealItemIngredientController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
         public MealItemIngredientController(ApplicationDbContext context)
+        : base(context)
         {
-            _context = context;    
+            _context = context;
         }
 
         // GET: MealItemIngredient
@@ -52,7 +53,7 @@ namespace clean_aspnet_mvc.Controllers
         }
 
         // POST: MealItemIngredient/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -86,7 +87,7 @@ namespace clean_aspnet_mvc.Controllers
         }
 
         // POST: MealItemIngredient/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
