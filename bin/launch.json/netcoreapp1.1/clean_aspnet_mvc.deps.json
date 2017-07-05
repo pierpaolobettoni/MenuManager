@@ -6,14 +6,13 @@
   "compilationOptions": {
     "defines": [
       "TRACE",
-      "DEBUG",
+      "LAUNCH_JSON",
       "NETCOREAPP1_1"
     ],
     "languageVersion": "",
     "platform": "",
     "allowUnsafe": false,
     "warningsAsErrors": false,
-    "optimize": false,
     "keyFile": "",
     "emitEntryPoint": true,
     "xmlDoc": false,
