@@ -59,7 +59,7 @@ namespace clean_aspnet_mvc.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(groceryCategory);
-                await _context.SaveChangesAsync();
+                await base.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(groceryCategory);
@@ -98,7 +98,7 @@ namespace clean_aspnet_mvc.Controllers
                 try
                 {
                     _context.Update(groceryCategory);
-                    await _context.SaveChangesAsync();
+                    await base.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -141,7 +141,7 @@ namespace clean_aspnet_mvc.Controllers
         {
             var groceryCategory = await _context.GroceryCategory.SingleOrDefaultAsync(m => m.Id == id);
             _context.GroceryCategory.Remove(groceryCategory);
-            await _context.SaveChangesAsync();
+            await base.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

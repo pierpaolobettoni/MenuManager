@@ -22,7 +22,9 @@ namespace clean_aspnet_mvc.Controllers
         // GET: GroceryItem
         public async Task<IActionResult> Index()
         {
-            return View(await _context.GroceryItems.ToListAsync());
+            var resultList = await base.GetLoggedInUser().GetGroceryItems().Include(x => x.GroceryCategory).ToListAsync();
+
+            return View(resultList);
         }
 
         // GET: GroceryItem/Details/5
@@ -46,6 +48,7 @@ namespace clean_aspnet_mvc.Controllers
         // GET: GroceryItem/Create
         public IActionResult Create()
         {
+            ViewBag.GroceryCategories = base.GetLoggedInUser().GetGroceryCategories();
             return View();
         }
 
@@ -54,12 +57,13 @@ namespace clean_aspnet_mvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,GroceryItemName")] GroceryItem groceryItem)
+        public async Task<IActionResult> Create([Bind("Id,GroceryItemName, GroceryCategoryId")] GroceryItem groceryItem)
         {
+            ViewBag.GroceryCategories = base.GetLoggedInUser().GetGroceryCategories();
             if (ModelState.IsValid)
             {
                 _context.Add(groceryItem);
-                await _context.SaveChangesAsync();
+                await base.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(groceryItem);
@@ -68,6 +72,7 @@ namespace clean_aspnet_mvc.Controllers
         // GET: GroceryItem/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewBag.GroceryCategories = base.GetLoggedInUser().GetGroceryCategories();
             if (id == null)
             {
                 return NotFound();
@@ -86,8 +91,9 @@ namespace clean_aspnet_mvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,GroceryItemName")] GroceryItem groceryItem)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,GroceryItemName, GroceryCategoryId")] GroceryItem groceryItem)
         {
+            ViewBag.GroceryCategories = base.GetLoggedInUser().GetGroceryCategories();
             if (id != groceryItem.Id)
             {
                 return NotFound();
@@ -98,7 +104,7 @@ namespace clean_aspnet_mvc.Controllers
                 try
                 {
                     _context.Update(groceryItem);
-                    await _context.SaveChangesAsync();
+                    await base.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -141,7 +147,7 @@ namespace clean_aspnet_mvc.Controllers
         {
             var groceryItem = await _context.GroceryItems.SingleOrDefaultAsync(m => m.Id == id);
             _context.GroceryItems.Remove(groceryItem);
-            await _context.SaveChangesAsync();
+            await base.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

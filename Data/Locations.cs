@@ -21,6 +21,7 @@ namespace clean_aspnet_mvc.Data
         public string Description { get; set; }
 
         public ICollection<UserLocations> UserLocations { get; set; }
+
     }
 
     public class BaseEntityChildOfLocation

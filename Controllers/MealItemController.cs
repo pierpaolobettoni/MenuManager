@@ -59,8 +59,8 @@ namespace clean_aspnet_mvc.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(mealItem);
-                //await _context.SaveChangesAsync();
-                await _context.SaveChangesAsync(GetLoggedInUser().GetCurrentLocation());
+                //await base.SaveChangesAsync();
+                await base.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(mealItem);
@@ -99,7 +99,7 @@ namespace clean_aspnet_mvc.Controllers
                 try
                 {
                     _context.Update(mealItem);
-                    await _context.SaveChangesAsync();
+                    await base.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -142,7 +142,7 @@ namespace clean_aspnet_mvc.Controllers
         {
             var mealItem = await _context.MealItems.SingleOrDefaultAsync(m => m.Id == id);
             _context.MealItems.Remove(mealItem);
-            await _context.SaveChangesAsync();
+            await base.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

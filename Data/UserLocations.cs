@@ -16,6 +16,9 @@ namespace clean_aspnet_mvc.Data
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string UserName { get; set; }
+
+        [ForeignKey("Location")]
+        public int LocationId {get;set;}
         public Locations Location { get; set; }
 
         public bool IsDefaultLocationForUser {get; set;}

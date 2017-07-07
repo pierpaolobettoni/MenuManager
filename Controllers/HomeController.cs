@@ -8,12 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace clean_aspnet_mvc.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : ControllerBase
     {
         private IServiceProvider _serviceProvider;
         private ApplicationDbContext _dbContext;
 
         public HomeController(IServiceProvider provider, ApplicationDbContext context)
+        :   base(context)
         {
             _serviceProvider = provider;
             _dbContext = context;

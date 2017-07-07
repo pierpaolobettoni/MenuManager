@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Collections;
 using clean_aspnet_mvc.Models.EmptyAccountModels;
+using System;
 
 public class CurrentLoggedInUser
 {
@@ -21,6 +22,11 @@ public class CurrentLoggedInUser
         }
         _dbContext = dbContext;
         _httpContext = httpContext;
+    }
+
+    internal List<EventMealSlotType> GetEventMealSlotTypes()
+    {
+        return (from x in _dbContext.EventMealSlotTypes where x.Location == GetCurrentLocation() select x).ToList();
     }
 
     public string UserName()
@@ -68,14 +74,13 @@ public class CurrentLoggedInUser
         .ToList<MealItem>();
     }
 
-    public List<GroceryItem> GetGroceryItems()
+    public IQueryable<GroceryItem> GetGroceryItems()
     {
         return _dbContext.GroceryItems
-        .Where(e => e.Location == GetCurrentLocation())
-        .ToList();
+        .Where(e => e.Location == GetCurrentLocation());
     }
 
-    public List<GroceryCategory> GetGroceryCategory()
+    public List<GroceryCategory> GetGroceryCategories()
     {
         return _dbContext.GroceryCategory
         .Where(e => e.Location == GetCurrentLocation())
@@ -101,8 +106,9 @@ public class CurrentLoggedInUser
         }
         else
         {
-            retList = AddMisttingStepIfCollectionIsEmpty(GetEventTypes(), "Please enter the event types", "/EventType", retList);
-            retList = AddMisttingStepIfCollectionIsEmpty(GetGroceryCategory(), "There are no Grocery Types", "/GroceryType", retList);
+            retList = AddMisttingStepIfCollectionIsEmpty(GetEventTypes(), "There are no event types", "/EventType", retList);
+            retList = AddMisttingStepIfCollectionIsEmpty(GetGroceryCategories(), "There are no Grocery Categories", "/GroceryCategory", retList);
+            retList = AddMisttingStepIfCollectionIsEmpty(GetEventMealSlotTypes(), "There are no Event Meal Slots", "/EventMealSlotType", retList);
         }
         return retList;
     }

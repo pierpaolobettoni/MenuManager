@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
+
     <UserSecretsId>aspnet-clean_aspnet_mvc-E6588AE8-335C-45E0-A288-49BE997837D8</UserSecretsId>
     <PackageTargetFallback>
     $(PackageTargetFallback);portable-net45+win8+wp8+wpa81;

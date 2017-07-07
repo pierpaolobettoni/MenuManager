@@ -20,9 +20,9 @@ namespace clean_aspnet_mvc.Controllers
         }
 
         // GET: EventMealSlotType
-        public async Task<IActionResult> Index()
+        public  IActionResult Index()
         {
-            return View(await _context.EventMealSlotTypes.ToListAsync());
+            return View( GetLoggedInUser().GetEventMealSlotTypes().ToList());
         }
 
         // GET: EventMealSlotType/Details/5
@@ -59,7 +59,7 @@ namespace clean_aspnet_mvc.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(eventMealSlotType);
-                await _context.SaveChangesAsync(base.GetLoggedInUser().GetCurrentLocation());
+                await base.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(eventMealSlotType);
@@ -98,7 +98,7 @@ namespace clean_aspnet_mvc.Controllers
                 try
                 {
                     _context.Update(eventMealSlotType);
-                    await _context.SaveChangesAsync();
+                    await base.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -141,7 +141,7 @@ namespace clean_aspnet_mvc.Controllers
         {
             var eventMealSlotType = await _context.EventMealSlotTypes.SingleOrDefaultAsync(m => m.Id == id);
             _context.EventMealSlotTypes.Remove(eventMealSlotType);
-            await _context.SaveChangesAsync();
+            await base.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

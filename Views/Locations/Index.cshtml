@@ -1,25 +1,31 @@
-@model IEnumerable<clean_aspnet_mvc.Data.Locations>
+@model clean_aspnet_mvc.Models.LocationsList.LocationsListViewModel
 
 
-
+<h4>Locations</h4>
+<div class="alert alert-info">
+  You can work with any number of locations you want, but only one of them at the time. Change your 'Current' location to switch between them.
+</div>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
-    <thead>
+<thead>
         <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.LocationName)
+                    Location Name
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                    Description
                 </th>
-
+                <th>
+                    Is Current
+                </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.LocationsList) {
+
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.LocationName)
@@ -28,8 +34,18 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
+              @if (item.Id == Model.DefaultLocationId)
+              {
+               <span class="glyphicon glyphicon-ok"></span>
+              }
+              else
+              {
+                <a class="btn btn-primary"  role="button" asp-action="MakeDefault" asp-route-id="@item.Id">Set as Current</a>
+
+              }
+            </td>
+            <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>

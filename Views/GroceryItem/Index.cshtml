@@ -1,4 +1,4 @@
-@model IEnumerable<GroceryItem>
+@model IEnumerable<clean_aspnet_mvc.Data.GroceryItem>
 
 <h4>Grocery Items</h4>
 <p>
@@ -10,6 +10,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.GroceryItemName)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GroceryCategory)
+                </th>
             <th></th>
         </tr>
     </thead>
@@ -20,8 +23,10 @@
                 @Html.DisplayFor(modelItem => item.GroceryItemName)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.GroceryCategory.GroceryCategoryName)
+            </td>
+            <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>

@@ -1,21 +1,10 @@
-@model GroceryItem
+@model clean_aspnet_mvc.Data.GroceryItem
 
-@{
-    Layout = null;
-}
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
-</head>
-<body>
 
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>GroceryItem</h4>
+        <h4>Edit Grocery Item</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
@@ -23,6 +12,13 @@
             <label asp-for="GroceryItemName" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="GroceryItemName" class="form-control" />
+                <span asp-validation-for="GroceryItemName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="GroceryCategoryId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GroceryCategoryId)
                 <span asp-validation-for="GroceryItemName" class="text-danger"></span>
             </div>
         </div>
@@ -38,5 +34,4 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-</body>
-</html>
+

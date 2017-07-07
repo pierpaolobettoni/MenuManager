@@ -64,7 +64,7 @@ namespace clean_aspnet_mvc.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(eventMeal);
-                await _context.SaveChangesAsync();
+                await base.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(eventMeal);
@@ -103,7 +103,7 @@ namespace clean_aspnet_mvc.Controllers
                 try
                 {
                     _context.Update(eventMeal);
-                    await _context.SaveChangesAsync();
+                    await base.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -146,7 +146,7 @@ namespace clean_aspnet_mvc.Controllers
         {
             var eventMeal = await _context.EventMeal.SingleOrDefaultAsync(m => m.Id == id);
             _context.EventMeal.Remove(eventMeal);
-            await _context.SaveChangesAsync();
+            await base.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

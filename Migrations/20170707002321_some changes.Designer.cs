@@ -8,9 +8,10 @@ using clean_aspnet_mvc.Data;
 namespace clean_aspnet_mvc.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170707002321_some changes")]
+    partial class somechanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");
@@ -242,16 +243,12 @@ namespace clean_aspnet_mvc.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("GroceryCategoryId");
-
                     b.Property<string>("GroceryItemName")
                         .IsRequired();
 
                     b.Property<int?>("LocationId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GroceryCategoryId");
 
                     b.HasIndex("LocationId");
 
@@ -493,11 +490,6 @@ namespace clean_aspnet_mvc.Migrations
 
             modelBuilder.Entity("GroceryItem", b =>
                 {
-                    b.HasOne("GroceryCategory", "GroceryCategory")
-                        .WithMany()
-                        .HasForeignKey("GroceryCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId");

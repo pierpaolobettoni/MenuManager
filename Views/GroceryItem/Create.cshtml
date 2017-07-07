@@ -1,4 +1,4 @@
-@model GroceryItem
+@model clean_aspnet_mvc.Data.GroceryItem
 
 
 
@@ -11,6 +11,13 @@
             <label asp-for="GroceryItemName" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="GroceryItemName" class="form-control" />
+                <span asp-validation-for="GroceryItemName" class="text-danger"></span>
+            </div>
+        </div>
+         <div class="form-group">
+            <label asp-for="GroceryCategoryId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GroceryCategoryId)
                 <span asp-validation-for="GroceryItemName" class="text-danger"></span>
             </div>
         </div>

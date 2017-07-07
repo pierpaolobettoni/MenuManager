@@ -1,18 +1,24 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using clean_aspnet_mvc.Data;
-public class GroceryItem: BaseEntityChildOfLocation
+namespace clean_aspnet_mvc.Data
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public class GroceryItem : BaseEntityChildOfLocation
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
-    public int Id { get; set; }
+        public int Id { get; set; }
 
-    [Required]
-    public string GroceryItemName { get; set; }
+        [Required]
+        public string GroceryItemName { get; set; }
 
 
+        public GroceryCategory GroceryCategory { get; set; }
+
+        [ForeignKey("GroceryCategory")]
+        [UIHint("GroceryCategoryId")]
+        public int GroceryCategoryId { get; set; }
+
+    }
 
 }
-
-

@@ -66,7 +66,7 @@ namespace clean_aspnet_mvc.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(@event);
-                await _context.SaveChangesAsync();
+                await base.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(@event);
@@ -110,7 +110,7 @@ namespace clean_aspnet_mvc.Controllers
                 try
                 {
                     _context.Update(@event);
-                    await _context.SaveChangesAsync();
+                    await base.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -153,7 +153,7 @@ namespace clean_aspnet_mvc.Controllers
         {
             var @event = await _context.Events.SingleOrDefaultAsync(m => m.Id == id);
             _context.Events.Remove(@event);
-            await _context.SaveChangesAsync();
+            await base.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using clean_aspnet_mvc.Data;
+using clean_aspnet_mvc.Models.LocationsList;
 
 namespace clean_aspnet_mvc.Controllers
 {
@@ -22,7 +23,10 @@ namespace clean_aspnet_mvc.Controllers
         // GET: Locations
         public async Task<IActionResult> Index()
         {
-            return View(await (from l in _context.UserLocations where l.UserName == User.Identity.Name select l.Location).ToListAsync());
+            LocationsListViewModel viewModel = new LocationsListViewModel();
+            viewModel.LocationsList = (from l in _context.UserLocations where l.UserName == User.Identity.Name select l.Location).ToList();
+            viewModel.DefaultLocationId = await (from l in _context.UserLocations where l.UserName == User.Identity.Name && l.IsDefaultLocationForUser == true select l.Location.Id).FirstOrDefaultAsync();
+            return View(viewModel);
         }
 
         // GET: Locations/Details/5
@@ -41,6 +45,27 @@ namespace clean_aspnet_mvc.Controllers
             }
 
             return View(locations);
+        }
+
+        public async Task<IActionResult> MakeDefault(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+
+
+            var defaultLocationRecord = (from l in _context.UserLocations where l.UserName == User.Identity.Name && l.IsDefaultLocationForUser == true select l).FirstOrDefault();
+            if (defaultLocationRecord != null)
+            {
+                defaultLocationRecord.IsDefaultLocationForUser = false;
+            }
+
+            var userLocationRecord = (from l in _context.UserLocations where l.UserName == User.Identity.Name && l.LocationId == id select l).FirstOrDefault();
+            userLocationRecord.IsDefaultLocationForUser = true;
+            await base.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
         // GET: Locations/Create
@@ -67,14 +92,14 @@ namespace clean_aspnet_mvc.Controllers
 
 
                 _context.Add(locations);
-                await _context.SaveChangesAsync();
+                await base.SaveChangesAsync();
 
                 UserLocations userLocation = new UserLocations();
                 userLocation.UserName = User.Identity.Name;
                 userLocation.IsDefaultLocationForUser = isDefaultLocation;
                 userLocation.Location = locations;
                 _context.Add(userLocation);
-                await _context.SaveChangesAsync();
+                await base.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(locations);
@@ -113,7 +138,7 @@ namespace clean_aspnet_mvc.Controllers
                 try
                 {
                     _context.Update(locations);
-                    await _context.SaveChangesAsync();
+                    await base.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -156,7 +181,7 @@ namespace clean_aspnet_mvc.Controllers
         {
             var locations = await _context.Locations.SingleOrDefaultAsync(m => m.Id == id);
             _context.Locations.Remove(locations);
-            await _context.SaveChangesAsync();
+            await base.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

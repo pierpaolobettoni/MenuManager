@@ -62,7 +62,7 @@ namespace clean_aspnet_mvc.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(mealItemIngredient);
-                await _context.SaveChangesAsync();
+                await base.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             ViewData["GroceryItemId"] = new SelectList(_context.GroceryItems, "Id", "GroceryItemName", mealItemIngredient.GroceryItemId);
@@ -103,7 +103,7 @@ namespace clean_aspnet_mvc.Controllers
                 try
                 {
                     _context.Update(mealItemIngredient);
-                    await _context.SaveChangesAsync();
+                    await base.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -148,7 +148,7 @@ namespace clean_aspnet_mvc.Controllers
         {
             var mealItemIngredient = await _context.MealItemIngredients.SingleOrDefaultAsync(m => m.Id == id);
             _context.MealItemIngredients.Remove(mealItemIngredient);
-            await _context.SaveChangesAsync();
+            await base.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
