@@ -15,7 +15,10 @@ namespace clean_aspnet_mvc.Data
         [Display(Name = "Meal Item")]
         public virtual MealItem MealItem { get; set; }
 
-
-
+        [ForeignKey("MealItem")]
+        public int MealItemId {get; set;}
+        public virtual Menu Menu{get; set;}
+        [ForeignKey("Menu")]
+        public int MenuId {get; set;}
     }
 }

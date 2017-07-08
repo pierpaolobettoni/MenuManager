@@ -1,0 +1,23 @@
+@model IEnumerable<clean_aspnet_mvc.Data.MenuMealItem>
+
+
+<table class="table">
+
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MealItem.MealItemName)
+            </td>
+
+            <td>
+                <a asp-action="MenuMealItemDelete" asp-route-id="@item.MenuId" asp-route-menuMealItemId="@item.Id">Delete</a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+

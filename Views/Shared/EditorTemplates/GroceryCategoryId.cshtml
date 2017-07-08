@@ -1,7 +1,7 @@
 @model int
 
 
-@Html.DropDownListFor(x=>x, new SelectList(ViewBag.GroceryCategories, "Id", "GroceryCategoryName"))
+@Html.DropDownListFor(x=>x, new SelectList(ViewBag.GroceryCategories, "Id", "GroceryCategoryName"), new { @class="form-control" })
 
 
 

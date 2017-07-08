@@ -8,9 +8,10 @@ using clean_aspnet_mvc.Data;
 namespace clean_aspnet_mvc.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170708154301_changed MenuMealItem: added FKs")]
+    partial class changedMenuMealItemaddedFKs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");
@@ -516,7 +517,7 @@ namespace clean_aspnet_mvc.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("clean_aspnet_mvc.Data.Menu", "Menu")
-                        .WithMany("MealItems")
+                        .WithMany()
                         .HasForeignKey("MenuId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

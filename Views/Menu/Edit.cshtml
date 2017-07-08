@@ -22,6 +22,20 @@
         </div>
     </div>
 </form>
+<div class="panel panel-default">
+  <div class="panel-heading">
+
+    <h3 class="panel-title">Meal Items</h3>
+  </div>
+
+    @Html.Partial("MealItemList", Model.MealItems)
+
+<div class="panel-footer">
+
+   @Html.Partial("AddMealItem")
+</div>
+      </div>
+
 
 <div>
     <a asp-action="Index">Back to List</a>

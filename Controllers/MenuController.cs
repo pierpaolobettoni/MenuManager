@@ -73,7 +73,8 @@ namespace clean_aspnet_mvc.Controllers
                 return NotFound();
             }
 
-            var menu = await _context.Menus.SingleOrDefaultAsync(m => m.Id == id);
+            var menu = await _context.Menus.Include("MealItems").SingleOrDefaultAsync(m => m.Id == id && m.Location == GetLoggedInUser().GetCurrentLocation());
+            ViewBag.MealItems = await _context.MealItems.Where(x => x.Location == GetLoggedInUser().GetCurrentLocation()).ToListAsync();
             if (menu == null)
             {
                 return NotFound();
@@ -143,6 +144,29 @@ namespace clean_aspnet_mvc.Controllers
             _context.Menus.Remove(menu);
             await base.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost, ActionName("AddMealItem")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddMealItem(int id, [Bind("MealItemId")] MenuMealItem newMealItem)
+        {
+
+            newMealItem.MenuId = id;
+
+            DBContext.Add(newMealItem);
+            await base.SaveChangesAsync();
+            return RedirectToAction("Edit", new {id = id});
+        }
+
+        public async Task<IActionResult> MenuMealItemDelete(int id, int menuMealItemId)
+        {
+            var itemToDelete = await (from x in DBContext.MenuMealItem where x.MenuId == id && x.Id == menuMealItemId && x.Location == GetLoggedInUser().GetCurrentLocation() select x).FirstOrDefaultAsync();
+            if (itemToDelete != null)
+            {
+                DBContext.Remove(itemToDelete);
+                await DBContext.SaveChangesAsync();
+            }
+            return RedirectToAction("Edit", new {id = id});
         }
 
         private bool MenuExists(int id)
