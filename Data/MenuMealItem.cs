@@ -12,6 +12,7 @@ namespace clean_aspnet_mvc.Data
         public int Id { get; set; }
 
         [Required]
+        [Display(Name = "Meal Item")]
         public virtual MealItem MealItem { get; set; }
 
 

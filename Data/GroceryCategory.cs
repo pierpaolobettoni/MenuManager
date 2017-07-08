@@ -9,7 +9,10 @@ public class GroceryCategory : BaseEntityChildOfLocation
     public int Id { get; set; }
 
     [Required]
+    [Display(Name = "Grocery Category")]
     public string GroceryCategoryName { get; set; }
+
+    [Display(Name = "Description")]
 
     public string GroceryCategoryDescription { get; set; }
 

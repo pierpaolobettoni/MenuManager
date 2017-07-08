@@ -14,6 +14,7 @@ namespace clean_aspnet_mvc.Data
         public virtual Event Event { get; set; }
 
         [Required]
+        [Display(Name = "Meal Slot")]
         public virtual EventMealSlotType EventMealSlot { get; set; }
 
     }

@@ -20,24 +20,30 @@ namespace clean_aspnet_mvc.Data
         public int Id { get; set; }
 
         [Required]
+        [Display(Name = "Event Name")]
         public string EventName { get; set; }
         [DataType(DataType.MultilineText)]
+        [Display(Name = "Event Description")]
         public string EventDescription {get;set;}
         [Required]
         [Column(TypeName = "Date")]
         [DataType(DataType.DateTime)]
+        [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
         [Required]
         [Column(TypeName = "Date")]
         [DataType(DataType.DateTime)]
+        [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
 
         [ForeignKey("EventType")]
         [UIHint("EventTypeId")]
+        [Display(Name = "Event Type")]
         public int EventTypeId { get; set; }
 
         public virtual EventType EventType { get; set; }
 
+        [Display(Name = "Event Meals")]
         public virtual ICollection<EventMeal> Meals {get; set;}
 
 

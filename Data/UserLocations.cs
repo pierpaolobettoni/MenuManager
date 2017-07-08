@@ -20,7 +20,7 @@ namespace clean_aspnet_mvc.Data
         [ForeignKey("Location")]
         public int LocationId {get;set;}
         public Locations Location { get; set; }
-
+        [Display(Name = "Current Location")]
         public bool IsDefaultLocationForUser {get; set;}
        }
 }

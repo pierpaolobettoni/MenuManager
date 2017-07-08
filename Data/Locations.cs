@@ -17,6 +17,7 @@ namespace clean_aspnet_mvc.Data
         public int Id { get; set; }
 
         [Required]
+        [Display(Name = "Location Name")]
         public string LocationName { get; set; }
         public string Description { get; set; }
 

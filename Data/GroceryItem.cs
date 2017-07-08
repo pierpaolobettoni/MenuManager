@@ -10,13 +10,15 @@ namespace clean_aspnet_mvc.Data
         public int Id { get; set; }
 
         [Required]
+        [Display(Name = "Grocery Item")]
         public string GroceryItemName { get; set; }
 
-
+        [Display(Name = "Grocery Category")]
         public GroceryCategory GroceryCategory { get; set; }
 
         [ForeignKey("GroceryCategory")]
         [UIHint("GroceryCategoryId")]
+        [Display(Name = "Grocery Category")]
         public int GroceryCategoryId { get; set; }
 
     }

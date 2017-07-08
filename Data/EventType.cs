@@ -13,6 +13,7 @@ public class EventType : BaseEntityChildOfLocation
         public int Id { get; set; }
 
         [Required]
+        [Display(Name = "Event Type")]
         public string EventTypeName { get; set; }
 
         public virtual ICollection<Event> Events {get; set;}
