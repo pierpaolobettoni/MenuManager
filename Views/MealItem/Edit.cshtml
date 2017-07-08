@@ -1,4 +1,4 @@
-@model MealItem
+@model clean_aspnet_mvc.Data.MealItem
 
 
 
@@ -48,4 +48,7 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-
+@Html.Partial("MealItemIngredientList", Model.Ingredients)
+<p>
+    <a asp-action="MealItemIngredientAdd" asp-route-id=@Model.Id>Add an ingredient</a>
+</p>

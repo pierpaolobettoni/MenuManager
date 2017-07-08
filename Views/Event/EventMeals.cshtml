@@ -1,11 +1,16 @@
 @model clean_aspnet_mvc.Data.Event
+
 <div class="panel panel-default">
-  <div class="panel-heading">Event meals</div>
+
+  <div class="panel-heading">
+<button type="button" class="btn btn-default btn-sm pull-right">
+          <div class="glyphicon glyphicon-plus" aria-hidden="true" ></div> Add a meal
+    </button>
+<h class="panel-title">Event meals</h3>
+  </div>
   <div class="panel-body">
 
-    <button type="button" class="btn btn-default btn-sm">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a meal
-    </button>
+
 @if (Model.Meals == null) {
       <div class="alert alert-info">There are currently no meals scheduled for this event.</div>
     }

@@ -74,7 +74,8 @@ namespace clean_aspnet_mvc.Controllers
                 return NotFound();
             }
 
-            var mealItem = await _context.MealItems.SingleOrDefaultAsync(m => m.Id == id);
+            var mealItem = await _context.MealItems.Include("Ingredients").Include("Ingredients.GroceryItem").SingleOrDefaultAsync(m => m.Id == id);
+
             if (mealItem == null)
             {
                 return NotFound();
@@ -149,6 +150,57 @@ namespace clean_aspnet_mvc.Controllers
         private bool MealItemExists(int id)
         {
             return _context.MealItems.Any(e => e.Id == id);
+        }
+
+        // GET: MealItemIngredient/Create
+        public IActionResult MealItemIngredientAdd(int id)
+        {
+            ViewData["GroceryItemId"] = new SelectList(_context.GroceryItems, "Id", "GroceryItemName");
+            ViewData["MealItemId"] = id;
+            return View();
+        }
+
+         public IActionResult MealItemIngredientEdit(int id)
+        {
+            ViewData["GroceryItemId"] = new SelectList(_context.GroceryItems, "Id", "GroceryItemName");
+            ViewData["MealItemId"] = id;
+            var model = (from ingredient in base.DBContext.MealItemIngredients where ingredient.Id == id && ingredient.Location == GetLoggedInUser().GetCurrentLocation() select ingredient).FirstOrDefault();
+            return View(model);
+        }
+
+        // POST: MealItemIngredient/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> MealItemIngredientAdd([Bind("GroceryItemId,Quantity,MeasureType, MealItemId")] MealItemIngredient mealItemIngredient)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(mealItemIngredient);
+                await base.SaveChangesAsync();
+                return RedirectToAction("Edit", new { id = mealItemIngredient.MealItemId });
+            }
+            ViewData["GroceryItemId"] = new SelectList(_context.GroceryItems, "Id", "GroceryItemName", mealItemIngredient.GroceryItemId);
+            return View(mealItemIngredient);
+        }
+
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> MealItemIngredientEdit([Bind("Id, GroceryItemId,Quantity,MeasureType")] MealItemIngredient mealItemIngredient)
+        {
+            if (ModelState.IsValid)
+            {
+                var existingItem = (from i in DBContext.MealItemIngredients where i.Id == mealItemIngredient.Id && i.Location == GetLoggedInUser().GetCurrentLocation() select i).First();
+                existingItem.GroceryItemId = mealItemIngredient.GroceryItemId;
+                existingItem.MeasureType = mealItemIngredient.MeasureType;
+                existingItem.Quantity = mealItemIngredient.Quantity;
+                await base.SaveChangesAsync();
+                return RedirectToAction("Edit", new { id = existingItem.MealItemId });
+            }
+            ViewData["GroceryItemId"] = new SelectList(_context.GroceryItems, "Id", "GroceryItemName", mealItemIngredient.GroceryItemId);
+            return View();
         }
     }
 }

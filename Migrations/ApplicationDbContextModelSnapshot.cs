@@ -100,6 +100,27 @@ namespace clean_aspnet_mvc.Migrations
                     b.ToTable("EventTypes");
                 });
 
+            modelBuilder.Entity("clean_aspnet_mvc.Data.GroceryItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("GroceryCategoryId");
+
+                    b.Property<string>("GroceryItemName")
+                        .IsRequired();
+
+                    b.Property<int?>("LocationId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroceryCategoryId");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("GroceryItems");
+                });
+
             modelBuilder.Entity("clean_aspnet_mvc.Data.Locations", b =>
                 {
                     b.Property<int>("Id")
@@ -113,6 +134,29 @@ namespace clean_aspnet_mvc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Locations");
+                });
+
+            modelBuilder.Entity("clean_aspnet_mvc.Data.MealItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("LocationId");
+
+                    b.Property<string>("MealItemDescription");
+
+                    b.Property<string>("MealItemName")
+                        .IsRequired();
+
+                    b.Property<string>("MeasureType");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("MealItems");
                 });
 
             modelBuilder.Entity("clean_aspnet_mvc.Data.Menu", b =>
@@ -235,50 +279,6 @@ namespace clean_aspnet_mvc.Migrations
                     b.HasIndex("LocationId");
 
                     b.ToTable("GroceryCategory");
-                });
-
-            modelBuilder.Entity("GroceryItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("GroceryCategoryId");
-
-                    b.Property<string>("GroceryItemName")
-                        .IsRequired();
-
-                    b.Property<int?>("LocationId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GroceryCategoryId");
-
-                    b.HasIndex("LocationId");
-
-                    b.ToTable("GroceryItems");
-                });
-
-            modelBuilder.Entity("MealItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("LocationId");
-
-                    b.Property<string>("MealItemDescription");
-
-                    b.Property<string>("MealItemName")
-                        .IsRequired();
-
-                    b.Property<string>("MeasureType");
-
-                    b.Property<int>("Quantity");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LocationId");
-
-                    b.ToTable("MealItems");
                 });
 
             modelBuilder.Entity("MealItemIngredient", b =>
@@ -457,6 +457,25 @@ namespace clean_aspnet_mvc.Migrations
                         .HasForeignKey("LocationId");
                 });
 
+            modelBuilder.Entity("clean_aspnet_mvc.Data.GroceryItem", b =>
+                {
+                    b.HasOne("GroceryCategory", "GroceryCategory")
+                        .WithMany()
+                        .HasForeignKey("GroceryCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+                });
+
+            modelBuilder.Entity("clean_aspnet_mvc.Data.MealItem", b =>
+                {
+                    b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+                });
+
             modelBuilder.Entity("clean_aspnet_mvc.Data.Menu", b =>
                 {
                     b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
@@ -470,7 +489,7 @@ namespace clean_aspnet_mvc.Migrations
                         .WithMany()
                         .HasForeignKey("LocationId");
 
-                    b.HasOne("MealItem", "MealItem")
+                    b.HasOne("clean_aspnet_mvc.Data.MealItem", "MealItem")
                         .WithMany()
                         .HasForeignKey("MealItemId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -491,28 +510,9 @@ namespace clean_aspnet_mvc.Migrations
                         .HasForeignKey("LocationId");
                 });
 
-            modelBuilder.Entity("GroceryItem", b =>
-                {
-                    b.HasOne("GroceryCategory", "GroceryCategory")
-                        .WithMany()
-                        .HasForeignKey("GroceryCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId");
-                });
-
-            modelBuilder.Entity("MealItem", b =>
-                {
-                    b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId");
-                });
-
             modelBuilder.Entity("MealItemIngredient", b =>
                 {
-                    b.HasOne("GroceryItem", "GroceryItem")
+                    b.HasOne("clean_aspnet_mvc.Data.GroceryItem", "GroceryItem")
                         .WithMany()
                         .HasForeignKey("GroceryItemId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -521,8 +521,8 @@ namespace clean_aspnet_mvc.Migrations
                         .WithMany()
                         .HasForeignKey("LocationId");
 
-                    b.HasOne("MealItem", "MealItem")
-                        .WithMany()
+                    b.HasOne("clean_aspnet_mvc.Data.MealItem", "MealItem")
+                        .WithMany("Ingredients")
                         .HasForeignKey("MealItemId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace clean_aspnet_mvc.Migrations
 {
-    public partial class INITIALMIGRATION : Migration
+    public partial class SETUP : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -144,7 +144,7 @@ namespace clean_aspnet_mvc.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGeneratedOnAdd", true),
                     IsDefaultLocationForUser = table.Column<bool>(nullable: false),
-                    LocationId = table.Column<int>(nullable: true),
+                    LocationId = table.Column<int>(nullable: false),
                     UserName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -155,7 +155,7 @@ namespace clean_aspnet_mvc.Migrations
                         column: x => x.LocationId,
                         principalTable: "Locations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -173,26 +173,6 @@ namespace clean_aspnet_mvc.Migrations
                     table.PrimaryKey("PK_GroceryCategory", x => x.Id);
                     table.ForeignKey(
                         name: "FK_GroceryCategory_Locations_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "Locations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "GroceryItems",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGeneratedOnAdd", true),
-                    GroceryItemName = table.Column<string>(nullable: false),
-                    LocationId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GroceryItems", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_GroceryItems_Locations_LocationId",
                         column: x => x.LocationId,
                         principalTable: "Locations",
                         principalColumn: "Id",
@@ -339,6 +319,33 @@ namespace clean_aspnet_mvc.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GroceryItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGeneratedOnAdd", true),
+                    GroceryCategoryId = table.Column<int>(nullable: false),
+                    GroceryItemName = table.Column<string>(nullable: false),
+                    LocationId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GroceryItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GroceryItems_GroceryCategory_GroceryCategoryId",
+                        column: x => x.GroceryCategoryId,
+                        principalTable: "GroceryCategory",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GroceryItems_Locations_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Locations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MenuMealItem",
                 columns: table => new
                 {
@@ -358,41 +365,6 @@ namespace clean_aspnet_mvc.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_MenuMealItem_MealItems_MealItemId",
-                        column: x => x.MealItemId,
-                        principalTable: "MealItems",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MealItemIngredients",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGeneratedOnAdd", true),
-                    GroceryItemId = table.Column<int>(nullable: false),
-                    LocationId = table.Column<int>(nullable: true),
-                    MealItemId = table.Column<int>(nullable: false),
-                    MeasureType = table.Column<string>(nullable: true),
-                    Quantity = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MealItemIngredients", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_MealItemIngredients_GroceryItems_GroceryItemId",
-                        column: x => x.GroceryItemId,
-                        principalTable: "GroceryItems",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MealItemIngredients_Locations_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "Locations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_MealItemIngredients_MealItems_MealItemId",
                         column: x => x.MealItemId,
                         principalTable: "MealItems",
                         principalColumn: "Id",
@@ -428,6 +400,48 @@ namespace clean_aspnet_mvc.Migrations
                         name: "FK_EventMeal_Locations_LocationId",
                         column: x => x.LocationId,
                         principalTable: "Locations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MealItemIngredients",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGeneratedOnAdd", true),
+                    GroceryItemId = table.Column<int>(nullable: false),
+                    LocationId = table.Column<int>(nullable: true),
+                    MealItemId = table.Column<int>(nullable: false),
+                    MeasureType = table.Column<string>(nullable: true),
+                    MenuMealItemId = table.Column<int>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MealItemIngredients", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MealItemIngredients_GroceryItems_GroceryItemId",
+                        column: x => x.GroceryItemId,
+                        principalTable: "GroceryItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MealItemIngredients_Locations_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Locations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_MealItemIngredients_MealItems_MealItemId",
+                        column: x => x.MealItemId,
+                        principalTable: "MealItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MealItemIngredients_MenuMealItem_MenuMealItemId",
+                        column: x => x.MenuMealItemId,
+                        principalTable: "MenuMealItem",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -468,6 +482,16 @@ namespace clean_aspnet_mvc.Migrations
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_GroceryItems_GroceryCategoryId",
+                table: "GroceryItems",
+                column: "GroceryCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GroceryItems_LocationId",
+                table: "GroceryItems",
+                column: "LocationId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Menus_LocationId",
                 table: "Menus",
                 column: "LocationId");
@@ -504,11 +528,6 @@ namespace clean_aspnet_mvc.Migrations
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GroceryItems_LocationId",
-                table: "GroceryItems",
-                column: "LocationId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_MealItems_LocationId",
                 table: "MealItems",
                 column: "LocationId");
@@ -527,6 +546,11 @@ namespace clean_aspnet_mvc.Migrations
                 name: "IX_MealItemIngredients_MealItemId",
                 table: "MealItemIngredients",
                 column: "MealItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MealItemIngredients_MenuMealItemId",
+                table: "MealItemIngredients",
+                column: "MenuMealItemId");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
@@ -564,13 +588,7 @@ namespace clean_aspnet_mvc.Migrations
                 name: "Menus");
 
             migrationBuilder.DropTable(
-                name: "MenuMealItem");
-
-            migrationBuilder.DropTable(
                 name: "UserLocations");
-
-            migrationBuilder.DropTable(
-                name: "GroceryCategory");
 
             migrationBuilder.DropTable(
                 name: "MealItemIngredients");
@@ -600,7 +618,7 @@ namespace clean_aspnet_mvc.Migrations
                 name: "GroceryItems");
 
             migrationBuilder.DropTable(
-                name: "MealItems");
+                name: "MenuMealItem");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -610,6 +628,12 @@ namespace clean_aspnet_mvc.Migrations
 
             migrationBuilder.DropTable(
                 name: "EventTypes");
+
+            migrationBuilder.DropTable(
+                name: "GroceryCategory");
+
+            migrationBuilder.DropTable(
+                name: "MealItems");
 
             migrationBuilder.DropTable(
                 name: "Locations");

@@ -8,8 +8,8 @@ using clean_aspnet_mvc.Data;
 namespace clean_aspnet_mvc.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170707002321_some changes")]
-    partial class somechanges
+    [Migration("20170707201211_SETUP")]
+    partial class SETUP
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -99,6 +99,27 @@ namespace clean_aspnet_mvc.Migrations
                     b.HasIndex("LocationId");
 
                     b.ToTable("EventTypes");
+                });
+
+            modelBuilder.Entity("clean_aspnet_mvc.Data.GroceryItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("GroceryCategoryId");
+
+                    b.Property<string>("GroceryItemName")
+                        .IsRequired();
+
+                    b.Property<int?>("LocationId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroceryCategoryId");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("GroceryItems");
                 });
 
             modelBuilder.Entity("clean_aspnet_mvc.Data.Locations", b =>
@@ -238,23 +259,6 @@ namespace clean_aspnet_mvc.Migrations
                     b.ToTable("GroceryCategory");
                 });
 
-            modelBuilder.Entity("GroceryItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("GroceryItemName")
-                        .IsRequired();
-
-                    b.Property<int?>("LocationId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LocationId");
-
-                    b.ToTable("GroceryItems");
-                });
-
             modelBuilder.Entity("MealItem", b =>
                 {
                     b.Property<int>("Id")
@@ -291,6 +295,8 @@ namespace clean_aspnet_mvc.Migrations
 
                     b.Property<string>("MeasureType");
 
+                    b.Property<int?>("MenuMealItemId");
+
                     b.Property<int>("Quantity");
 
                     b.HasKey("Id");
@@ -300,6 +306,8 @@ namespace clean_aspnet_mvc.Migrations
                     b.HasIndex("LocationId");
 
                     b.HasIndex("MealItemId");
+
+                    b.HasIndex("MenuMealItemId");
 
                     b.ToTable("MealItemIngredients");
                 });
@@ -454,6 +462,18 @@ namespace clean_aspnet_mvc.Migrations
                         .HasForeignKey("LocationId");
                 });
 
+            modelBuilder.Entity("clean_aspnet_mvc.Data.GroceryItem", b =>
+                {
+                    b.HasOne("GroceryCategory", "GroceryCategory")
+                        .WithMany()
+                        .HasForeignKey("GroceryCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+                });
+
             modelBuilder.Entity("clean_aspnet_mvc.Data.Menu", b =>
                 {
                     b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
@@ -488,13 +508,6 @@ namespace clean_aspnet_mvc.Migrations
                         .HasForeignKey("LocationId");
                 });
 
-            modelBuilder.Entity("GroceryItem", b =>
-                {
-                    b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId");
-                });
-
             modelBuilder.Entity("MealItem", b =>
                 {
                     b.HasOne("clean_aspnet_mvc.Data.Locations", "Location")
@@ -504,7 +517,7 @@ namespace clean_aspnet_mvc.Migrations
 
             modelBuilder.Entity("MealItemIngredient", b =>
                 {
-                    b.HasOne("GroceryItem", "GroceryItem")
+                    b.HasOne("clean_aspnet_mvc.Data.GroceryItem", "GroceryItem")
                         .WithMany()
                         .HasForeignKey("GroceryItemId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -514,9 +527,13 @@ namespace clean_aspnet_mvc.Migrations
                         .HasForeignKey("LocationId");
 
                     b.HasOne("MealItem", "MealItem")
-                        .WithMany()
+                        .WithMany("Ingredients")
                         .HasForeignKey("MealItemId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("clean_aspnet_mvc.Data.MenuMealItem")
+                        .WithMany("Ingredients")
+                        .HasForeignKey("MenuMealItemId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

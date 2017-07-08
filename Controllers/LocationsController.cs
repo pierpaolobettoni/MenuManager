@@ -137,7 +137,13 @@ namespace clean_aspnet_mvc.Controllers
             {
                 try
                 {
-                    _context.Update(locations);
+                    var previousLocation = await (from l in DBContext.Locations where l.Id == locations.Id select l).FirstOrDefaultAsync();
+                    if (previousLocation != null)
+                    {
+                        previousLocation.Description = locations.Description;
+                        previousLocation.LocationName = locations.LocationName;
+                    }
+
                     await base.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

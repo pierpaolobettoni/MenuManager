@@ -1,26 +1,18 @@
-@model clean_aspnet_mvc.Data.MealItem
+@model clean_aspnet_mvc.Data.MealItemIngredient
 
+<h4> Edit Ingredient</h4>
+<form asp-action="MealItemIngredientEdit">
 
-
-<h3>Create a Meal Item </h3>
-<div class="alert alert-info">A meal item is any item that you might put in a dish, for example: potato salad.</div>
-<form asp-action="Create">
+    @Html.Hidden( "MealItemId",  ViewData["MealItemId"] )
+    @Html.HiddenFor(x => x.Id )
     <div class="form-horizontal">
-        <h4>MealItem</h4>
+
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="MealItemName" class="col-md-2 control-label"></label>
+            <label asp-for="GroceryItemId" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="MealItemName" class="form-control" />
-                <span asp-validation-for="MealItemName" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="MealItemDescription" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="MealItemDescription" class="form-control" />
-                <span asp-validation-for="MealItemDescription" class="text-danger"></span>
+                <select asp-for="GroceryItemId" class ="form-control" asp-items="ViewBag.GroceryItemId"></select>
             </div>
         </div>
         <div class="form-group">
@@ -39,7 +31,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Update" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -48,5 +40,4 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
 

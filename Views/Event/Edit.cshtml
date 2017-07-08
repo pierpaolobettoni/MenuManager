@@ -1,9 +1,15 @@
 @model clean_aspnet_mvc.Data.Event
 
-
+ <div class="panel-heading">
+<button type="button" class="btn btn-default btn-sm pull-right">
+          <div class="glyphicon glyphicon-plus" aria-hidden="true" ></div> Add a meal
+    </button>
+<h4>Event </h4>
+  </div>
+  <div class="panel-body">
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>Event</h4>
+
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
@@ -49,6 +55,8 @@
         </div>
     </div>
 </form>
+  </div>
+
 @Html.Partial("EventMeals", Model)
 <div>
     <a asp-action="Index">Back to List</a>
