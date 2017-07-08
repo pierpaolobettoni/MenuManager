@@ -4,7 +4,8 @@
 
   <div class="panel-heading">
 <button type="button" class="btn btn-default btn-sm pull-right">
-          <div class="glyphicon glyphicon-plus" aria-hidden="true" ></div> Add a meal
+          <div class="glyphicon glyphicon-plus" aria-hidden="true" ></div>
+
     </button>
 <h class="panel-title">Event meals</h3>
   </div>
@@ -29,8 +30,7 @@
               @foreach (var item in Model.Meals) {
                         <tr>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>  |
                                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                             </td>
                         </tr>

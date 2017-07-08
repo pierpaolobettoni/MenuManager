@@ -19,7 +19,7 @@ namespace clean_aspnet_mvc.Data
 
         [Required]
         [Display(Name = "Quantity")]
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
         [Display(Name = "Measure Type")]
         public string MeasureType { get; set; }
 

@@ -18,7 +18,8 @@
         <div class="form-group">
             <label asp-for="MealItemDescription" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="MealItemDescription" class="form-control" />
+
+                <textarea rows="3" class="form-control" asp-for="MealItemDescription"></textarea>
                 <span asp-validation-for="MealItemDescription" class="text-danger"></span>
             </div>
         </div>
@@ -44,11 +45,20 @@
     </div>
 </form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@Html.Partial("MealItemIngredientList", Model.Ingredients)
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <a asp-action="MealItemIngredientAdd" type="button" class="btn btn-default btn-sm pull-right" asp-route-id=@Model.Id>
+              <div class="glyphicon glyphicon-plus"  aria-hidden="true" ></div>
+              Add an ingredient
+    </a>
+    <h class="panel-title">Meal Item Ingredients</h3>
+  </div>
+  <div class="panel-body">
+    @Html.Partial("MealItemIngredientList", Model.Ingredients)
+      </div>
+  </div>
 <p>
-    <a asp-action="MealItemIngredientAdd" asp-route-id=@Model.Id>Add an ingredient</a>
+     <a asp-action="Index">Back to List</a>
 </p>
+
+

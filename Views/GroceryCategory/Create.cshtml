@@ -18,7 +18,8 @@
         <div class="form-group">
             <label asp-for="GroceryCategoryDescription" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="GroceryCategoryDescription" class="form-control" />
+              <textarea rows="3" class="form-control" asp-for="GroceryCategoryDescription"></textarea>
+
                 <span asp-validation-for="GroceryCategoryDescription" class="text-danger"></span>
             </div>
         </div>

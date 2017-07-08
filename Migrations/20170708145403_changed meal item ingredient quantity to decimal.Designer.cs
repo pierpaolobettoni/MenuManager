@@ -8,9 +8,10 @@ using clean_aspnet_mvc.Data;
 namespace clean_aspnet_mvc.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170708145403_changed meal item ingredient quantity to decimal")]
+    partial class changedmealitemingredientquantitytodecimal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");
@@ -150,7 +151,7 @@ namespace clean_aspnet_mvc.Migrations
 
                     b.Property<string>("MeasureType");
 
-                    b.Property<decimal>("Quantity");
+                    b.Property<int>("Quantity");
 
                     b.HasKey("Id");
 
