@@ -10,12 +10,21 @@ namespace clean_aspnet_mvc.Data
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
+        [ForeignKey("Event")]
+        public int EventId {get;set;}
+
         public virtual Event Event { get; set; }
 
         [Required]
         [Display(Name = "Meal Slot")]
         public virtual EventMealSlotType EventMealSlot { get; set; }
 
+        [ForeignKey("EventMealSlot")]
+        public int EventMealSlotId {get; set;}
+
+        [ForeignKey("Menu")]
+        public int MenuId {get; set;}
+
+        public Menu Menu {get;set;}
     }
 }

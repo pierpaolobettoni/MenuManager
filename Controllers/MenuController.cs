@@ -76,7 +76,7 @@ namespace clean_aspnet_mvc.Controllers
             }
 
             var menu = await _context.Menus.Include("MealItems").SingleOrDefaultAsync(m => m.Id == id && m.Location == GetLoggedInUser().GetCurrentLocation());
-            ViewBag.MealItems = await _context.MealItems.Where(x => x.Location == GetLoggedInUser().GetCurrentLocation()).ToListAsync();
+            ViewBag.MealItems = GetLoggedInUser().GetMealItems();
             if (menu == null)
             {
                 return NotFound();

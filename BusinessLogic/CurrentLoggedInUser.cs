@@ -66,6 +66,12 @@ public class CurrentLoggedInUser
         }
         return retValue;
     }
+
+    internal IQueryable<Menu> GetMenus()
+    {
+        return (from m in _dbContext.Menus where m.Location == GetCurrentLocation() select m);
+    }
+
     public List<MenuItemType> GetMenuItemTypes()
     {
         var retValue = new List<MenuItemType>();

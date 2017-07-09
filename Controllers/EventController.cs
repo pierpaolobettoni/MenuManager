@@ -61,6 +61,7 @@ namespace clean_aspnet_mvc.Controllers
         public async Task<IActionResult> Create([Bind("Id,EventName,StartDate,EndDate, EventTypeId, EventDescription")] Event @event)
         {
             ViewBag.EventTypes = GetLoggedInUser().GetEventTypes();
+
             @event.Location = base.GetLoggedInUser().GetCurrentLocation();
             ModelState.Remove("Location");
             if (ModelState.IsValid)
@@ -81,11 +82,13 @@ namespace clean_aspnet_mvc.Controllers
                 return NotFound();
             }
 
-            var @event = await _context.Events.SingleOrDefaultAsync(m => m.Id == id);
+            var @event = await _context.Events.Include("Meals").Include("Meals.Menu").SingleOrDefaultAsync(m => m.Id == id);
             if (@event == null)
             {
                 return NotFound();
             }
+            ViewBag.Slots = GetLoggedInUser().GetEventMealSlotTypes();
+            ViewBag.Menus = GetLoggedInUser().GetMenus();
             return View(@event);
         }
 
@@ -125,6 +128,8 @@ namespace clean_aspnet_mvc.Controllers
                 }
                 return RedirectToAction("Index");
             }
+            ViewBag.Slots = GetLoggedInUser().GetEventMealSlotTypes();
+            ViewBag.Menus = GetLoggedInUser().GetMenus();
             return View(@event);
         }
 
@@ -160,6 +165,33 @@ namespace clean_aspnet_mvc.Controllers
         private bool EventExists(int id)
         {
             return _context.Events.Any(e => e.Id == id);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddEventMeal([Bind("EventId, EventMealSlotId, MenuId")] EventMeal eventMeal)
+        {
+
+                _context.Add(eventMeal);
+                await base.SaveChangesAsync();
+
+
+            return RedirectToAction("Edit", new { id = eventMeal.EventId });
+        }
+
+
+
+        public async Task<IActionResult> DeleteEventMeal(int id, int eventId)
+        {
+                var eventMeal = await (from x in DBContext.EventMeal where x.Location == GetLoggedInUser().GetCurrentLocation() && x.Id == id select x).FirstAsync();
+                if (eventMeal != null)
+                {
+                    _context.Remove(eventMeal);
+                    await base.SaveChangesAsync();
+                }
+
+            return RedirectToAction("Edit", new { id = eventId });
         }
     }
 }
