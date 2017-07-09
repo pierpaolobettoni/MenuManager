@@ -66,11 +66,21 @@ public class CurrentLoggedInUser
         }
         return retValue;
     }
-
+    public List<MenuItemType> GetMenuItemTypes()
+    {
+        var retValue = new List<MenuItemType>();
+        var currentLocation = GetCurrentLocation();
+        if (currentLocation != null)
+        {
+            retValue = _dbContext.MenuItemTypes.Where(x => x.Location == GetCurrentLocation()).ToList();
+        }
+        return retValue;
+    }
     public List<MealItem> GetMealItems()
     {
-        return _dbContext.MealItems
+        return _dbContext.MealItems.Include("MenuItemType")
         .Where(e => e.Location == GetCurrentLocation())
+        .OrderBy(x => x.MenuItemType.Name).ThenBy(x => x.MealItemName)
         .ToList<MealItem>();
     }
 
@@ -109,6 +119,7 @@ public class CurrentLoggedInUser
             retList = AddMisttingStepIfCollectionIsEmpty(GetEventTypes(), "There are no event types", "/EventType", retList);
             retList = AddMisttingStepIfCollectionIsEmpty(GetGroceryCategories(), "There are no Grocery Categories", "/GroceryCategory", retList);
             retList = AddMisttingStepIfCollectionIsEmpty(GetEventMealSlotTypes(), "There are no Event Meal Slots", "/EventMealSlotType", retList);
+            retList = AddMisttingStepIfCollectionIsEmpty(GetMenuItemTypes(), "There are no Menu Item Types", "/MenuItemType", retList);
         }
         return retList;
     }

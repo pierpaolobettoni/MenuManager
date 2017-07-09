@@ -29,5 +29,7 @@ namespace clean_aspnet_mvc.Data
 
         public DbSet<clean_aspnet_mvc.Data.EventMealSlotType> EventMealSlotType { get; set; }
 
+        public DbSet<clean_aspnet_mvc.Data.MenuItemType> MenuItemType { get; set; }
+
     }
 }

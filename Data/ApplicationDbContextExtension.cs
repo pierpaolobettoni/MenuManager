@@ -33,6 +33,8 @@ namespace clean_aspnet_mvc.Data
 
          public virtual DbSet<MenuMealItem> MenuMealItem { get; set; }
 
+         public virtual DbSet<MenuItemType> MenuItemTypes { get; set; }
+
         public override int SaveChanges()
         {
 

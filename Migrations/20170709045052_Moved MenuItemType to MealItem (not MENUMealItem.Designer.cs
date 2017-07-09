@@ -8,9 +8,10 @@ using clean_aspnet_mvc.Data;
 namespace clean_aspnet_mvc.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170709045052_Moved MenuItemType to MealItem (not MENUMealItem")]
+    partial class MovedMenuItemTypetoMealItemnotMENUMealItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");
@@ -152,8 +153,6 @@ namespace clean_aspnet_mvc.Migrations
 
                     b.Property<int>("MenuItemTypeId");
 
-                    b.Property<int>("NumberOfServings");
-
                     b.Property<decimal>("Quantity");
 
                     b.HasKey("Id");
@@ -236,6 +235,8 @@ namespace clean_aspnet_mvc.Migrations
 
                     b.Property<int>("MenuId");
 
+                    b.Property<int>("MenuItemTypeId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("LocationId");
@@ -243,6 +244,8 @@ namespace clean_aspnet_mvc.Migrations
                     b.HasIndex("MealItemId");
 
                     b.HasIndex("MenuId");
+
+                    b.HasIndex("MenuItemTypeId");
 
                     b.ToTable("MenuMealItem");
                 });
@@ -553,6 +556,11 @@ namespace clean_aspnet_mvc.Migrations
                     b.HasOne("clean_aspnet_mvc.Data.Menu", "Menu")
                         .WithMany("MealItems")
                         .HasForeignKey("MenuId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("clean_aspnet_mvc.Data.MenuItemType", "MenuItemType")
+                        .WithMany()
+                        .HasForeignKey("MenuItemTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

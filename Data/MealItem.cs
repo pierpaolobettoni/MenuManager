@@ -24,6 +24,18 @@ namespace clean_aspnet_mvc.Data
         public string MeasureType { get; set; }
 
         public ICollection<MealItemIngredient> Ingredients { get; set; }
+
+        [ForeignKey("MenuItemType")]
+        [Display(Name = "Meal Item Type")]
+        [UIHint("MenuItemTypeId")]
+
+        public int MenuItemTypeId {set; get;}
+
+        public MenuItemType MenuItemType {get;set;}
+
+        [Display(Name="Number of Servings")]
+        [Required]
+        public int NumberOfServings{get; set;}
     }
 
 }

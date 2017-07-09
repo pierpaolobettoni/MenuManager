@@ -26,6 +26,13 @@
             </div>
         </div>
         <div class="form-group">
+            <label asp-for="MenuItemTypeId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                @Html.EditorFor(x => x.MenuItemTypeId)
+                <span asp-validation-for="MenuItemTypeId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
             <label asp-for="Quantity" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="Quantity" class="form-control" />
@@ -37,6 +44,13 @@
             <div class="col-md-10">
                 <input asp-for="MeasureType" class="form-control" />
                 <span asp-validation-for="MeasureType" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="NumberOfServings" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="NumberOfServings" class="form-control" />
+                <span asp-validation-for="NumberOfServings" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">

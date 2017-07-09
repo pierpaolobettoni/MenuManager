@@ -8,9 +8,10 @@ using clean_aspnet_mvc.Data;
 namespace clean_aspnet_mvc.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170709045900_Made MenuItemType changes")]
+    partial class MadeMenuItemTypechanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");
@@ -151,8 +152,6 @@ namespace clean_aspnet_mvc.Migrations
                     b.Property<string>("MeasureType");
 
                     b.Property<int>("MenuItemTypeId");
-
-                    b.Property<int>("NumberOfServings");
 
                     b.Property<decimal>("Quantity");
 

@@ -41,9 +41,8 @@
                         </a>
                         <ul class="dropdown-menu">
                           <li><a asp-area="" asp-controller="Event" asp-action="Index">Events</a></li>
-                          <li><a asp-area="" asp-controller="EventType" asp-action="Index">Event Types</a></li>
                           <li><a asp-area="" asp-controller="EventMealSlotType" asp-action="Index">Event Meal Slot Types</a></li>
-                          <li><a asp-area="" asp-controller="Locations" asp-action="Index">Locations</a></li>
+
                         </ul>
                       </li>
                     <li role="presentation" class="dropdown">
@@ -53,13 +52,28 @@
                         <ul class="dropdown-menu">
                           <li><a asp-area="" asp-controller="Menu" asp-action="Index">Menus</a></li>
                           <li><a asp-area="" asp-controller="MealItem" asp-action="Index">Meal Items</a></li>
-                          <li><a asp-area="" asp-controller="GroceryCategory" asp-action="Index">Grocery Catogory</a></li>
-                          <li><a asp-area="" asp-controller="GroceryItem" asp-action="Index">Grocery Item</a></li>
+                          <li><a asp-area="" asp-controller="GroceryItem" asp-action="Index">Grocery Items</a></li>
 
 
 
                         </ul>
                       </li>
+                      <li role="presentation" class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                          Configuration <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                           <li><a asp-area="" asp-controller="Locations" asp-action="Index">Locations</a></li>
+                          <li><a asp-area="" asp-controller="GroceryCategory" asp-action="Index">Grocery Catogory</a></li>
+                          <li><a asp-area="" asp-controller="EventType" asp-action="Index">Event Types</a></li>
+                          <li><a asp-area="" asp-controller="MenuItemType" asp-action="Index">Menu Item Types</a></li>
+
+
+
+
+                        </ul>
+                      </li>
+
 
 
 

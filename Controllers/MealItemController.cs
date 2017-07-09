@@ -20,9 +20,9 @@ namespace clean_aspnet_mvc.Controllers
         }
 
         // GET: MealItem
-        public async Task<IActionResult> Index()
+        public ActionResult Index()
         {
-            return View(await _context.MealItems.ToListAsync());
+            return View(GetLoggedInUser().GetMealItems());
         }
 
         // GET: MealItem/Details/5
@@ -46,6 +46,7 @@ namespace clean_aspnet_mvc.Controllers
         // GET: MealItem/Create
         public IActionResult Create()
         {
+            ViewBag.MenuItemTypes = GetLoggedInUser().GetMenuItemTypes();
             return View();
         }
 
@@ -54,7 +55,7 @@ namespace clean_aspnet_mvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,MealItemName,MealItemDescription,Quantity,MeasureType")] MealItem mealItem)
+        public async Task<IActionResult> Create([Bind("Id,MealItemName,MealItemDescription,Quantity,MeasureType, MenuItemTypeId, NumberOfServings")] MealItem mealItem)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +64,7 @@ namespace clean_aspnet_mvc.Controllers
                 await base.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            ViewBag.MenuItemTypes = GetLoggedInUser().GetMenuItemTypes();
             return View(mealItem);
         }
 
@@ -80,6 +82,7 @@ namespace clean_aspnet_mvc.Controllers
             {
                 return NotFound();
             }
+            ViewBag.MenuItemTypes = GetLoggedInUser().GetMenuItemTypes();
             return View(mealItem);
         }
 
@@ -88,7 +91,7 @@ namespace clean_aspnet_mvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,MealItemName,MealItemDescription,Quantity,MeasureType")] MealItem mealItem)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,MealItemName,MealItemDescription,Quantity,MeasureType, MenuItemTypeId, NumberOfServings")] MealItem mealItem)
         {
             if (id != mealItem.Id)
             {
@@ -115,6 +118,7 @@ namespace clean_aspnet_mvc.Controllers
                 }
                 return RedirectToAction("Index");
             }
+            ViewBag.MenuItemTypes = GetLoggedInUser().GetMenuItemTypes();
             return View(mealItem);
         }
 
