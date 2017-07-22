@@ -1,8 +1,9 @@
 
-FROM microsoft/aspnetcore:1
-LABEL Name=menumanager Version=0.0.1 
+FROM microsoft/aspnetcore-build
+LABEL Name=MenuManager Version=0.0.1
 ARG source=.
 WORKDIR /app
-EXPOSE 5000
+EXPOSE 5000:5000
 COPY $source .
-ENTRYPOINT dotnet menumanager.dll
+RUN dotnet restore
+ENTRYPOINT dotnet run

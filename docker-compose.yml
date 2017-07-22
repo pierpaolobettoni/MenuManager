@@ -2,9 +2,9 @@ version: '2.1'
 
 services:
   menumanager:
-    build:
-      args:
-        source: obj/Docker/empty/
+    image: menu-manager
+
+
     labels:
       - "com.microsoft.visualstudio.targetoperatingsystem=linux"
     environment:
