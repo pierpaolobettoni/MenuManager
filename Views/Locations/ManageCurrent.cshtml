@@ -1,0 +1,19 @@
+
+<h4>Manage @ViewData["CurrentLocationName"]</h4>
+<div class="alert alert-info">
+  Each location has it's own lists of Categories, Items and other lists that are needed to organize events.
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">Manage Lists</div>
+  <div class="panel-body">
+<ul >
+  <li><a asp-area="" asp-controller="GroceryCategory" asp-action="Index">Grocery Catogories</a></li>
+                          <li><a asp-area="" asp-controller="GroceryItem" asp-action="Index">Grocery Items</a></li>
+                          <li><a asp-area="" asp-controller="EventType" asp-action="Index">Event Types</a></li>
+
+                          <li><a asp-area="" asp-controller="MenuItemType" asp-action="Index">Menu Item Types</a></li>
+                          <li><a asp-area="" asp-controller="EventMealSlotType" asp-action="Index">Meal Slots</a></li>
+</ul>
+</div>
+</div>
+

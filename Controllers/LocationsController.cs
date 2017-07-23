@@ -33,6 +33,11 @@ namespace clean_aspnet_mvc.Controllers
             return View(viewModel);
         }
 
+         public IActionResult ManageCurrent()
+        {
+            return View();
+        }
+
         // GET: Locations/Details/5
         public async Task<IActionResult> Details(int? id)
         {
