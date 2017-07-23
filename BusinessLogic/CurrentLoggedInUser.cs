@@ -110,6 +110,8 @@ public class CurrentLoggedInUser
         .ToList();
     }
 
+    public ApplicationDbContext DBContext => _dbContext;
+
     public List<MissingStep> GetMissingSteps()
     {
         List<MissingStep> retList = new List<MissingStep>();
