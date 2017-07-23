@@ -26,6 +26,29 @@ namespace clean_aspnet_mvc.BusinessLogic
             await PrefillGroceryCategoryAsynch();
             await PrefillEventTypesAsynch();
             await PrefillGroceryItemsAsynch();
+            await PrefillMenuItemTypesAsynch();
+            await PrefillMealItemsAsynch();
+            await PrefillMealItemIngredientsAsynch();
+        }
+
+        private async Task PrefillMealItemsAsynch()
+        {
+
+            await Task.Factory.StartNew(() =>
+            {
+                PrefillMealItems();
+            });
+
+        }
+
+        private async Task PrefillMealItemIngredientsAsynch()
+        {
+
+            await Task.Factory.StartNew(() =>
+            {
+                PrefillMealItemIngredients();
+            });
+
         }
 
         private async Task PrefillMealSlotsAsynch()
@@ -58,6 +81,16 @@ namespace clean_aspnet_mvc.BusinessLogic
 
         }
 
+        private async Task PrefillMenuItemTypesAsynch()
+        {
+
+            await Task.Factory.StartNew(() =>
+            {
+                PrefillMenuItemTypes();
+            });
+
+        }
+
         private async Task PrefillGroceryItemsAsynch()
         {
 
@@ -68,9 +101,27 @@ namespace clean_aspnet_mvc.BusinessLogic
 
         }
 
+        private void PrefillEventTypes()
+        {
+            var eventTypes = GetTxtFile("1_EventTypes.txt");
+            foreach (string eventType in eventTypes)
+            {
+                _currentUser.DBContext.EventTypes.Add(new EventType() { EventTypeName = eventType, Location = _location });
+            }
+            _currentUser.DBContext.SaveChanges();
+        }
+        private void PrefillGroceryCategory()
+        {
+            var categories = GetTxtFile("2_GroceryCategory.txt");
+            foreach (string category in categories)
+            {
+                _currentUser.DBContext.GroceryCategory.Add(new GroceryCategory() { GroceryCategoryName = category, Location = _location });
+            }
+            _currentUser.DBContext.SaveChanges();
+        }
         private void PrefillMealSlots()
         {
-            var slots = GetTxtFile("MealSlotTypes.txt");
+            var slots = GetTxtFile("3_MealSlotTypes.txt");
             foreach (string slot in slots)
             {
                 _currentUser.DBContext.EventMealSlotTypes.Add(new EventMealSlotType() { Name = slot, Location = _location });
@@ -78,30 +129,10 @@ namespace clean_aspnet_mvc.BusinessLogic
             _currentUser.DBContext.SaveChanges();
         }
 
-        private void PrefillGroceryCategory()
-        {
-            var categories = GetTxtFile("Grocery_Category.txt");
-            foreach (string category in categories)
-            {
-                _currentUser.DBContext.GroceryCategory.Add(new GroceryCategory() { GroceryCategoryName = category, Location = _location });
-            }
-            _currentUser.DBContext.SaveChanges();
-        }
-
-        private void PrefillEventTypes()
-        {
-            var eventTypes = GetTxtFile("EventTypes.txt");
-            foreach (string eventType in eventTypes)
-            {
-                _currentUser.DBContext.EventTypes.Add(new EventType() { EventTypeName = eventType, Location = _location });
-            }
-            _currentUser.DBContext.SaveChanges();
-        }
-
         private void PrefillGroceryItems()
         {
             var categories = _currentUser.DBContext.GroceryCategory.Where(x => x.Location == _location).ToList();
-            var rows = GetTxtFile("GroceryItems.txt");
+            var rows = GetTxtFile("4_GroceryItems.txt");
             foreach (string thisRow in rows)
             {
                 var rowCells = thisRow.Split(',');
@@ -123,6 +154,92 @@ namespace clean_aspnet_mvc.BusinessLogic
                     throw new Exception("Cannot find category for GroceryItem " + groceryItemName);
                 }
 
+            }
+            _currentUser.DBContext.SaveChanges();
+        }
+
+
+
+        private void PrefillMenuItemTypes()
+        {
+            var rows = GetTxtFile("5_MealItemTypes.txt");
+            foreach (string thisRow in rows)
+            {
+                _currentUser.DBContext.MenuItemType.Add(new MenuItemType() { Name = thisRow, Location = _location });
+            }
+            _currentUser.DBContext.SaveChanges();
+        }
+
+        private void PrefillMealItems()
+        {
+            var menuItemTypes = _currentUser.DBContext.MenuItemTypes.Where(x => x.Location == _location).ToList();
+
+            var rows = GetTxtFile("6_MealItems.txt");
+            foreach (string thisRow in rows)
+            {
+                if (!string.IsNullOrEmpty(thisRow))
+                {
+                    var rowCells = thisRow.Split(',');
+                    var name = rowCells[0].Trim();
+                    var description = rowCells[1].Trim();
+                    var quantity = Decimal.Parse(rowCells[2].Trim());
+                    var measure = rowCells[3].Trim();
+                    var menuItemType = rowCells[4].Trim();
+                    var numberOfServings = int.Parse(rowCells[5].Trim());
+                    var thisMenuItemType = menuItemTypes.Where(x => x.Name == menuItemType).FirstOrDefault();
+                    if (thisMenuItemType == null)
+
+                        throw new Exception("Can't find menu item type for " + menuItemType);
+
+                    _currentUser.DBContext.MealItems.Add(
+                        new MealItem()
+                        {
+                            MealItemName = name,
+                            MealItemDescription = description,
+                            MenuItemTypeId = thisMenuItemType.Id,
+                            Quantity = quantity,
+                            MeasureType = measure,
+                            NumberOfServings = numberOfServings,
+                            Location = _location
+                        });
+                }
+            }
+            _currentUser.DBContext.SaveChanges();
+        }
+
+        private void PrefillMealItemIngredients()
+        {
+            var allMealItems = _currentUser.DBContext.MealItems.Where(x => x.Location == _location).ToList();
+            var allGroceryItems = _currentUser.DBContext.GroceryItems.Where(x => x.Location == _location).ToList();
+
+            var rows = GetTxtFile("7_MealItemIngredients.txt");
+            foreach (string thisRow in rows)
+            {
+                if (!string.IsNullOrEmpty(thisRow))
+                {
+                    var rowCells = thisRow.Split(',');
+                    var groceryItemName = rowCells[0].Trim();
+                    var quantity = Decimal.Parse(rowCells[1].Trim());
+                    var measure = rowCells[2].Trim();
+                    var mealItemName = rowCells[3].Trim();
+
+
+                    var thisMealItem = allMealItems.Where(x => x.MealItemName == mealItemName).FirstOrDefault();
+                    if (thisMealItem == null)
+                        throw new Exception("Can't find menu item type for " + thisMealItem);
+                    var thisGroceryItem = allGroceryItems.Where(x => x.GroceryItemName == groceryItemName).FirstOrDefault();
+                    if (groceryItemName == null)
+                        throw new Exception("Can't find grocoery item type for " + groceryItemName);
+                    _currentUser.DBContext.MealItemIngredients.Add(
+                        new MealItemIngredient()
+                        {
+                            GroceryItem = thisGroceryItem,
+                            MealItem = thisMealItem,
+                            MeasureType = measure,
+                            Quantity = quantity,
+                            Location = _location
+                        });
+                }
             }
             _currentUser.DBContext.SaveChanges();
         }
