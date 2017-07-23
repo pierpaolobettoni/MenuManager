@@ -20,7 +20,7 @@ namespace clean_aspnet_mvc.Controllers
         }
 
         // GET: GroceryCategory
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View(base.GetLoggedInUser().GetGroceryCategories());
         }
