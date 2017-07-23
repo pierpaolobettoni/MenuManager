@@ -37,8 +37,6 @@ namespace clean_aspnet_mvc.Data
 
         public override int SaveChanges()
         {
-
-            AddLocation(null);
             return base.SaveChanges();
         }
 
