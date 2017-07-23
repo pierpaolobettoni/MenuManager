@@ -7,17 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using clean_aspnet_mvc.Data;
 using clean_aspnet_mvc.Models.LocationsList;
+using clean_aspnet_mvc.BusinessLogic;
+using Microsoft.AspNetCore.Hosting;
 
 namespace clean_aspnet_mvc.Controllers
 {
     public class LocationsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private IHostingEnvironment _environment;
 
-        public LocationsController(ApplicationDbContext context)
+        public LocationsController(ApplicationDbContext context, IHostingEnvironment environment)
         : base(context)
         {
             _context = context;
+            _environment = environment;
         }
 
         // GET: Locations
@@ -100,6 +104,8 @@ namespace clean_aspnet_mvc.Controllers
                 userLocation.Location = locations;
                 _context.Add(userLocation);
                 await base.SaveChangesAsync();
+                DefaultDataManager defaultDataManager = new DefaultDataManager(_environment);
+                await defaultDataManager.Prefill(locations, GetLoggedInUser());
                 return RedirectToAction("Index");
             }
             return View(locations);
