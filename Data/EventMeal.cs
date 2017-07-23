@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using clean_aspnet_mvc.Data;
@@ -26,5 +27,7 @@ namespace clean_aspnet_mvc.Data
         public int MenuId {get; set;}
 
         public Menu Menu {get;set;}
+
+        public DateTime MealDate{get; set;}
     }
 }
