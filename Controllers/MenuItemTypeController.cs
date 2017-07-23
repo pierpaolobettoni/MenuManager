@@ -22,7 +22,7 @@ namespace clean_aspnet_mvc.Controllers
         // GET: MenuItemType
         public async Task<IActionResult> Index()
         {
-            return View(await _context.MenuItemTypes.ToListAsync());
+            return View(await _context.MenuItemTypes.Where(x => x.Location == GetLoggedInUser().GetCurrentLocation()).ToListAsync());
         }
 
         // GET: MenuItemType/Details/5
