@@ -39,7 +39,8 @@ namespace clean_aspnet_mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var defaultConnectionString = Configuration["CONNECTION_STRING"];
+            string defaultConnectionString = GetConnectionstring();
+
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(defaultConnectionString));
@@ -53,6 +54,16 @@ namespace clean_aspnet_mvc
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+        }
+
+        private static string GetConnectionstring()
+        {
+
+            var defaultConnectionString = Environment.GetEnvironmentVariable("MENU_MANAGER_CONNECTION_STRING");
+            if (string.IsNullOrEmpty(defaultConnectionString))
+                throw new Exception("Missing environment variable: MENU_MANAGER_CONNECTION_STRING");
+
+            return defaultConnectionString;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
