@@ -22,7 +22,7 @@ namespace clean_aspnet_mvc.Controllers
         // GET: GroceryCategory
         public async Task<IActionResult> Index()
         {
-            return View(await _context.GroceryCategory.ToListAsync());
+            return View(base.GetLoggedInUser().GetGroceryCategories());
         }
 
         // GET: GroceryCategory/Details/5
