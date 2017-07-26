@@ -58,7 +58,7 @@ namespace clean_aspnet_mvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,EventName,StartDate,EndDate, EventTypeId, EventDescription")] Event @event)
+        public async Task<IActionResult> Create([Bind("Id,EventName,StartDate,EndDate, EventTypeId, EventDescription, NumberOfPeopleAttending")] Event @event)
         {
             ViewBag.EventTypes = GetLoggedInUser().GetEventTypes();
 
@@ -88,7 +88,7 @@ namespace clean_aspnet_mvc.Controllers
                 return NotFound();
             }
             ViewBag.Slots = GetLoggedInUser().GetEventMealSlotTypes();
-            ViewBag.Menus = GetLoggedInUser().GetMenus();
+            ViewBag.Menus = GetLoggedInUser().GetMenus().ToList();
             return View(@event);
         }
 
@@ -97,7 +97,7 @@ namespace clean_aspnet_mvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,EventName,StartDate,EndDate,EventTypeId, EventDescription")] Event @event)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,EventName,StartDate,EndDate,EventTypeId, EventDescription, NumberOfPeopleAttending")] Event @event)
         {
             ViewBag.EventTypes = GetLoggedInUser().GetEventTypes();
             @event.Location = base.GetLoggedInUser().GetCurrentLocation();
@@ -170,13 +170,17 @@ namespace clean_aspnet_mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddEventMeal([Bind("EventId, EventMealSlotId, MenuId")] EventMeal eventMeal)
+        public async Task<IActionResult> AddEventMeal([Bind("EventId, EventMealSlotId, MenuId, NumberOfPeopleAttending, MealDate")] EventMeal eventMeal)
         {
 
+            var thisEvent =  await base.DBContext.Events.Where(x => x.Id == eventMeal.EventId).FirstOrDefaultAsync();
+            if (thisEvent == null)
+                throw new Exception("Bad event");
+            if (eventMeal.MealDate >= thisEvent.StartDate && eventMeal.MealDate <= thisEvent.EndDate)
+            {
                 _context.Add(eventMeal);
                 await base.SaveChangesAsync();
-
-
+            }
             return RedirectToAction("Edit", new { id = eventMeal.EventId });
         }
 
@@ -184,12 +188,12 @@ namespace clean_aspnet_mvc.Controllers
 
         public async Task<IActionResult> DeleteEventMeal(int id, int eventId)
         {
-                var eventMeal = await (from x in DBContext.EventMeal where x.Location == GetLoggedInUser().GetCurrentLocation() && x.Id == id select x).FirstAsync();
-                if (eventMeal != null)
-                {
-                    _context.Remove(eventMeal);
-                    await base.SaveChangesAsync();
-                }
+            var eventMeal = await (from x in DBContext.EventMeal where x.Location == GetLoggedInUser().GetCurrentLocation() && x.Id == id select x).FirstAsync();
+            if (eventMeal != null)
+            {
+                _context.Remove(eventMeal);
+                await base.SaveChangesAsync();
+            }
 
             return RedirectToAction("Edit", new { id = eventId });
         }

@@ -1,9 +1,7 @@
 @model clean_aspnet_mvc.Data.Event
 
  <div class="panel-heading">
-<button type="button" class="btn btn-default btn-sm pull-right">
-          <div class="glyphicon glyphicon-plus" aria-hidden="true" ></div> Add a meal
-    </button>
+
 <h4>Event </h4>
   </div>
   <div class="panel-body">
@@ -43,6 +41,13 @@
             </div>
         </div>
          <div class="form-group">
+            <label asp-for="NumberOfPeopleAttending" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+              @Html.EditorFor(model => model.NumberOfPeopleAttending)
+                <span asp-validation-for="EventType" class="text-danger"></span>
+            </div>
+        </div>
+         <div class="form-group">
             <label asp-for="EventType" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                  @Html.EditorFor(model => model.EventTypeId)
@@ -59,6 +64,7 @@
   </div>
 
 @Html.Partial("EventMeals", Model)
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

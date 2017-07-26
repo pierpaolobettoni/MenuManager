@@ -8,9 +8,10 @@ using clean_aspnet_mvc.Data;
 namespace clean_aspnet_mvc.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170723234338_added required")]
+    partial class addedrequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");
@@ -31,8 +32,6 @@ namespace clean_aspnet_mvc.Migrations
                     b.Property<int>("EventTypeId");
 
                     b.Property<int?>("LocationId");
-
-                    b.Property<int>("NumberOfPeopleAttending");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("Date");

@@ -46,7 +46,10 @@ namespace clean_aspnet_mvc.Data
         [Display(Name = "Event Meals")]
         public virtual ICollection<EventMeal> Meals {get; set;}
 
-
+        [Display(Name = "# Attendees")]
+        [Range(1, 100000)]
+        [Required]
+        public int NumberOfPeopleAttending {get; set;}
 
     }
 

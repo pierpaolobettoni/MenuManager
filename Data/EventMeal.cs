@@ -28,6 +28,13 @@ namespace clean_aspnet_mvc.Data
 
         public Menu Menu {get;set;}
 
+        [Required]
         public DateTime MealDate{get; set;}
+
+        [Required]
+         [Display(Name = "# Attendees")]
+        public int NumberOfPeopleAttending {get; set;}
+
+        public string Notes {get; set;}
     }
 }

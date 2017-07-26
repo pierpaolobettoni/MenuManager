@@ -1,0 +1,56 @@
+@model IEnumerable<clean_aspnet_mvc.Data.Event>
+
+<h3>Select events</h3>
+
+<form asp-action="CalculateIngredients">
+    <div class="form-horizontal">
+<div class="list-group-item list-group-item-info">Select the events that you want to be shopping for... <br/></div>
+  <div>
+  @foreach(var thisEvent in Model)
+  {
+
+    <li class="list-group-item">
+  @{var durationDays = (thisEvent.EndDate - thisEvent.StartDate).TotalDays + 1;}
+      @if (durationDays > 1)
+      {
+        <span class="badge">@durationDays days</span>
+      }
+
+        <span class="badge"> @thisEvent.StartDate.ToString("MM/dd")</span>
+        <h4 class="list-group-item-heading">@thisEvent.EventName </h4>
+        <p class="list-group-item-text">@thisEvent.EventDescription</p>
+
+          <ul >
+            @{
+              var previousDate = DateTime.MinValue;
+            }
+
+          @foreach(var thisMeal in thisEvent.Meals)
+          {
+            @if (thisMeal.MealDate != previousDate)
+            {
+              <li class="list-group-item disabled"> @thisMeal.MealDate.ToString("MM/dd")</li>
+            }
+
+            <li class="list-group-item">
+              <div class="checkbox">
+                <label><input type="checkbox" value=@thisMeal.Id name="selectedMealIds">@thisMeal.EventMealSlot.Name</label>
+              </div>
+              </li>
+
+            {
+              previousDate = thisMeal.MealDate;
+            }
+
+          }
+          </ul>
+
+  </li>
+  }
+</div>
+<br/>
+<div class="well">
+ <input type="submit" value="Continue >>" class="btn btn-success" />
+ </div>
+    </div>
+</form>
