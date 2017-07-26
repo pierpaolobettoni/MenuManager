@@ -42,6 +42,15 @@ namespace clean_aspnet_mvc.Data
         public List<MealItemShoppingListItem> MealItemShoppingLists { get; set; }
     }
 
+    public class MealsShoppingList
+    {
+        public MealsShoppingList()
+        {
+            MealShoppingLists = new List<EventMealShoppingList>();
+        }
+        public List<EventMealShoppingList> MealShoppingLists {get; set;}
+    }
+
     public class ShoppingListCalculator
     {
 
@@ -92,15 +101,16 @@ namespace clean_aspnet_mvc.Data
             return retValue;
         }
 
-        public static async Task<EventMealShoppingList> CalculateShoppingList(int[] mealIds, CurrentLoggedInUser currentUser)
+        public static async Task<MealsShoppingList> CalculateShoppingList(int[] mealIds, CurrentLoggedInUser currentUser)
         {
-            EventMealShoppingList retValue = new EventMealShoppingList();
+            MealsShoppingList retValue = new MealsShoppingList();
             var DBContext = currentUser.DBContext;
             // get the actual event Meals
             var meals = await DBContext.EventMeal.Where(x => x.Location == currentUser.GetCurrentLocation() && mealIds.Contains(x.Id)).ToListAsync();
             foreach(var thisMeal in meals)
             {
-                await retValue.MealItemShoppingLists.Add(CalculateShoppingList(thisMeal, DBContext));
+                var calculationResult = await CalculateShoppingList(thisMeal, DBContext);
+                retValue.MealShoppingLists.Add(calculationResult);
             }
             return retValue;
         }

@@ -29,8 +29,8 @@ namespace clean_aspnet_mvc.Controllers
         public async Task<IActionResult> CalculateIngredientsForMeals(int[] selectedMealIds)
         {
 
-            var meals = await DBContext.EventMeal.Include("Event").Include("EventMealSlot").Include("Menu").Where(x => selectedMealIds.Contains(x.Id)).OrderBy(x => x.MealDate).ToArrayAsync();
-            return View(meals);
+            base.GetLoggedInUser().CalculateShoppingList(selectedMealIds);
+            return View();
         }
 
 

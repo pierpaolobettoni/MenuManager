@@ -42,6 +42,11 @@ public class CurrentLoggedInUser
         .FirstOrDefault();
     }
 
+    internal async Task CalculateShoppingList(int[] selectedMealIds)
+    {
+        var meals = await DBContext.EventMeal.Include("Event").Include("EventMealSlot").Include("Menu").Where(x => selectedMealIds.Contains(x.Id)).OrderBy(x => x.MealDate).ToArrayAsync();
+    }
+
     public ICollection<Locations> GetCurrentLocations()
     {
         return _dbContext.UserLocations
