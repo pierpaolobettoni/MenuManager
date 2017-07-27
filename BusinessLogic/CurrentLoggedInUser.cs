@@ -25,6 +25,11 @@ public class CurrentLoggedInUser
         _httpContext = httpContext;
     }
 
+    internal async Task<List<GroceryItem>> GetAllGroceryItems()
+    {
+        return await (from x in _dbContext.GroceryItems where x.Location == GetCurrentLocation() select x).ToListAsync();
+    }
+
     internal List<EventMealSlotType> GetEventMealSlotTypes()
     {
         return (from x in _dbContext.EventMealSlotTypes where x.Location == GetCurrentLocation() select x).ToList();
