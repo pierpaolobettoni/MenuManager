@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Collections;
 using clean_aspnet_mvc.Models.EmptyAccountModels;
 using System;
+using clean_aspnet_mvc.Data.Calculations;
 
 public class CurrentLoggedInUser
 {
@@ -42,9 +43,10 @@ public class CurrentLoggedInUser
         .FirstOrDefault();
     }
 
-    internal async Task CalculateShoppingList(int[] selectedMealIds)
+    public async Task<MealsShoppingList> CalculateShoppingList(int[] selectedMealIds)
     {
-        var meals = await DBContext.EventMeal.Include("Event").Include("EventMealSlot").Include("Menu").Where(x => selectedMealIds.Contains(x.Id)).OrderBy(x => x.MealDate).ToArrayAsync();
+        MealsShoppingList results = await ShoppingListCalculator.CalculateShoppingList(selectedMealIds, this);
+        return results;
     }
 
     public ICollection<Locations> GetCurrentLocations()

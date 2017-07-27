@@ -50,7 +50,6 @@ namespace clean_aspnet_mvc.Data
         [Range(1, 100000)]
         [Required]
         public int NumberOfPeopleAttending {get; set;}
-
     }
 
 

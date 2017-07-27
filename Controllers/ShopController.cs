@@ -21,7 +21,7 @@ namespace clean_aspnet_mvc.Controllers
         public async Task<IActionResult> CalculateIngredients()
         {
             // show all future events
-            var nextEvents = await DBContext.Events.Include("Meals").Include("Meals.EventMealSlot").Where(x => x.StartDate >= DateTime.Today && x.Location == GetLoggedInUser().GetCurrentLocation()).OrderBy(x => x.StartDate).ThenBy(x => x.EventName).ToArrayAsync();
+            var nextEvents = await DBContext.Events.Include("Meals").Include("Meals.EventMealSlot").Include("Meals.Event").Where(x => x.StartDate >= DateTime.Today && x.Location == GetLoggedInUser().GetCurrentLocation()).OrderBy(x => x.StartDate).ThenBy(x => x.EventName).ToArrayAsync();
             return View(nextEvents);
         }
 
@@ -29,8 +29,8 @@ namespace clean_aspnet_mvc.Controllers
         public async Task<IActionResult> CalculateIngredientsForMeals(int[] selectedMealIds)
         {
 
-            base.GetLoggedInUser().CalculateShoppingList(selectedMealIds);
-            return View();
+            var mealShoppingList = await base.GetLoggedInUser().CalculateShoppingList(selectedMealIds);
+            return View(mealShoppingList);
         }
 
 
