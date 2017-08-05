@@ -27,7 +27,7 @@ public class CurrentLoggedInUser
 
     internal async Task<List<GroceryItem>> GetAllGroceryItems()
     {
-        return await (from x in _dbContext.GroceryItems where x.Location == GetCurrentLocation() select x).ToListAsync();
+        return await (from x in _dbContext.GroceryItems.Include(x => x.GroceryCategory) where x.Location == GetCurrentLocation() select x).ToListAsync();
     }
 
     internal List<EventMealSlotType> GetEventMealSlotTypes()

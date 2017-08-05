@@ -159,14 +159,14 @@ namespace clean_aspnet_mvc.Controllers
         // GET: MealItemIngredient/Create
         public IActionResult MealItemIngredientAdd(int id)
         {
-            ViewData["GroceryItemId"] = new SelectList(_context.GroceryItems, "Id", "GroceryItemName");
+            ViewData["GroceryItemId"] = new SelectList(GetLoggedInUser().GetAllGroceryItems().Result.OrderBy(x => x.GroceryItemName), "Id", "NameWithCategoryAtTheEnd");
             ViewData["MealItemId"] = id;
             return View();
         }
 
          public IActionResult MealItemIngredientEdit(int id)
         {
-            ViewData["GroceryItemId"] = new SelectList(_context.GroceryItems, "Id", "GroceryItemName");
+            ViewData["GroceryItemId"] = new SelectList(GetLoggedInUser().GetAllGroceryItems().Result.OrderBy(x => x.GroceryItemName), "Id", "NameWithCategoryAtTheEnd");
             ViewData["MealItemId"] = id;
             var model = (from ingredient in base.DBContext.MealItemIngredients where ingredient.Id == id && ingredient.Location == GetLoggedInUser().GetCurrentLocation() select ingredient).FirstOrDefault();
             return View(model);
@@ -185,7 +185,7 @@ namespace clean_aspnet_mvc.Controllers
                 await base.SaveChangesAsync();
                 return RedirectToAction("Edit", new { id = mealItemIngredient.MealItemId });
             }
-            ViewData["GroceryItemId"] = new SelectList(_context.GroceryItems, "Id", "GroceryItemName", mealItemIngredient.GroceryItemId);
+            ViewData["GroceryItemId"] = new SelectList(GetLoggedInUser().GetAllGroceryItems().Result.OrderBy(x => x.GroceryItemName), "Id", "NameWithCategoryAtTheEnd", mealItemIngredient.GroceryItemId);
             return View(mealItemIngredient);
         }
 
@@ -203,7 +203,7 @@ namespace clean_aspnet_mvc.Controllers
                 await base.SaveChangesAsync();
                 return RedirectToAction("Edit", new { id = existingItem.MealItemId });
             }
-            ViewData["GroceryItemId"] = new SelectList(_context.GroceryItems, "Id", "GroceryItemName", mealItemIngredient.GroceryItemId);
+            ViewData["GroceryItemId"] = new SelectList(GetLoggedInUser().GetAllGroceryItems().Result.OrderBy(x => x.GroceryItemName), "Id", "NameWithCategoryAtTheEnd", mealItemIngredient.GroceryItemId);
             return View();
         }
     }

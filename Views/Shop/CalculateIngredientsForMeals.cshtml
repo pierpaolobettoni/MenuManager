@@ -1,33 +1,47 @@
-@model clean_aspnet_mvc.Data.Calculations.MealsShoppingList
+@model clean_aspnet_mvc.Models.ShoppingViewModels.ShoppingListCalculationViewModel
 
 <h3>Shopping List Details</h3>
 
 <form asp-action="CalculateIngredientsForMeals">
     <div class="form-horizontal">
-<div class="list-group-item list-group-item-info">Select the events that you want to be shopping for... <br/></div>
-   @foreach(var thisEventMealShoppingList in Model.EventMealShoppingLists)
-    {
-      <li class="list-group-item">
-        @thisEventMealShoppingList.EventMeal.MealDate.ToString("MM:dd") @thisEventMealShoppingList.EventMeal.Event.EventName @thisEventMealShoppingList.EventMeal.EventMealSlot.Name
 
-<ul>
-          @foreach(var thisMealItemShippingListItem in thisEventMealShoppingList.MealItemShoppingLists)
-          {
-            <li class="list-group-item">
-              @thisMealItemShippingListItem.MealItem.MealItemName @@thisMealItemShippingListItem.MealItem.Multiplier
-              @foreach(var thisShoppingListItem in thisMealItemShippingListItem.ShoppingListItems)
-              {
-                <li class="list-group-item">
-                  @thisShoppingListItem.GroceryItem.GroceryItemName @thisShoppingListItem.Quantity @thisShoppingListItem.Measure
-                </li>
-              }
-            </li>
-          }
-</ul>
-</li>
+<div class="list-group-item list-group-item-info">Consolidated Shopping List<br/></div>
+<table class="table">
+   @{
+     var previousCategory = "";
+     var previousGroceryItemName = "";
+     var rows = Model.GetConsolidatedShoppingListRows().OrderBy(x => x.CategoryName).ThenBy( x => x.GroceryItemName).ToList();
+     var howManyWithTheSameCategory = 0;
+     var mustRenderCategory = true;
+   }
+
+   @foreach(var thisRow in rows)
+    {
+      if (previousCategory!= thisRow.CategoryName)
+      {
+        mustRenderCategory = true;
+      }
+      howManyWithTheSameCategory = rows.Where( x=> x.CategoryName == thisRow.CategoryName && thisRow.GroceryItemName == thisRow.GroceryItemName).Count();
+      <tr>
+        @if (mustRenderCategory)
+        {
+          <td rowspan=@howManyWithTheSameCategory colspan="1">
+            @(thisRow.CategoryName != previousCategory ? thisRow.CategoryName : "")
+          </td>
+        }
+          <td>
+            @thisRow.GroceryItemName
+          </td>
+          <td>
+            @thisRow.Quantity.ToString("#.##")  @thisRow.Measure
+          </td>
+      </tr>
+      previousCategory = thisRow.CategoryName;
+      previousGroceryItemName = thisRow.GroceryItemName;
+      mustRenderCategory = false;
 
     }
-<br/>
+</table>
 <div class="well">
  <input type="submit" value="Continue >>" class="btn btn-success" />
  </div>

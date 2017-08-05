@@ -21,6 +21,20 @@ namespace clean_aspnet_mvc.Data
         [Display(Name = "Grocery Category")]
         public int GroceryCategoryId { get; set; }
 
+        [NotMapped]
+        public string NameWithCategoryAtTheEnd {
+            get {
+                if (this.GroceryCategory != null)
+                {
+                    return this.GroceryItemName + "  - " + GroceryCategory.GroceryCategoryName.ToLower();
+                }
+                else
+                {
+                    return this.GroceryItemName + " - category not loaded";
+                }
+            }
+        }
+
     }
 
 }

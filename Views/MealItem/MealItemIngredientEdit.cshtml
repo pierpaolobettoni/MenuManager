@@ -1,6 +1,13 @@
 @model clean_aspnet_mvc.Data.MealItemIngredient
 
 <h4> Edit Ingredient</h4>
+ <div class="well">
+    For easier calculations you should use full measures and fractional quantities instead of fractional measures and full quantities.
+
+<br/>
+<br/>
+     Example: use <span class="label label-success">0.25 gallons</span> instead of <span class="label label-danger">1 quart</span>.
+    </div>
 <form asp-action="MealItemIngredientEdit">
 
     @Html.Hidden( "MealItemId",  ViewData["MealItemId"] )
@@ -37,7 +44,5 @@
     </div>
 </form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 

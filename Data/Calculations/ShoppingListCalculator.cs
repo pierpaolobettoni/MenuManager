@@ -15,45 +15,39 @@ namespace clean_aspnet_mvc.Data.Calculations
             return new MealItemMultiplier(mealItem, multiplier);
         }
 
-        private static EventMealShoppingList CalculateShoppingList(EventMeal meal, ApplicationDbContext DBContext)
+        private static EventMealShoppingList CalculateShoppingList(EventMeal eventMeal, ApplicationDbContext DBContext)
         {
 
-            var hydratedEventMeal = DBContext.EventMeal.Include( x=> x.Menu.MealItems).Where(x => x.Id == meal.Id).First();
+            var hydratedEventMeal = DBContext.EventMeal.Include( x=> x.Menu.MealItems).Where(x => x.Id == eventMeal.Id).First();
             List<MealItemMultiplier> mealItemShoppingLists = new List<MealItemMultiplier>();
+            var allMealItemIds = hydratedEventMeal.Menu.MealItems.Select( x=> x.MealItemId).ToArray();
+            var allmealItems = DBContext.MealItems.Include("Ingredients").Where( x => allMealItemIds.Contains(x.Id)).ToArray();
             // go through all the meal items
-            Parallel.ForEach (hydratedEventMeal.Menu.MealItems,  thisMenuMealItem =>
+            Parallel.ForEach (allmealItems,  thisMenuMealItem =>
             {
-                // ugly way of doing it...
-                var mealItem = DBContext.MealItems.Where( x => x.Id == thisMenuMealItem.MealItemId).First();
-                var mealItemMultiplier = CalculateMealItemMultiplier(mealItem, hydratedEventMeal.NumberOfPeopleAttending);
+                var mealItemMultiplier = CalculateMealItemMultiplier(thisMenuMealItem, hydratedEventMeal.NumberOfPeopleAttending);
                mealItemShoppingLists.Add(mealItemMultiplier);
             });
             EventMealShoppingList retValue = new EventMealShoppingList(hydratedEventMeal, mealItemShoppingLists);
             return retValue;
         }
 
-        public static async Task<MealsShoppingList> CalculateShoppingList(int[] mealIds, CurrentLoggedInUser currentUser)
+        public static async Task<MealsShoppingList> CalculateShoppingList(int[] eventMealIds, CurrentLoggedInUser currentUser)
         {
 
             var DBContext = currentUser.DBContext;
             // get the actual event Meals
-            var meals = await DBContext.EventMeal.Where(x => x.Location == currentUser.GetCurrentLocation() && mealIds.Contains(x.Id)).ToListAsync();
+            var meals = await DBContext.EventMeal.Where(x => x.Location == currentUser.GetCurrentLocation() && eventMealIds.Contains(x.Id)).ToListAsync();
             List<EventMealShoppingList> shoppingLists = new List<EventMealShoppingList>();
-            foreach (var thisMeal in meals)
+            foreach (EventMeal thisEventMeal in meals)
             {
-                var calculationResult = CalculateShoppingList(thisMeal, DBContext);
+                var calculationResult = CalculateShoppingList(thisEventMeal, DBContext);
                 shoppingLists.Add(calculationResult);
             }
             MealsShoppingList retValue = new MealsShoppingList(shoppingLists);
             return retValue;
         }
 
-        public static async Task GetLookupDataForShoppingList(MealsShoppingList mealsShoppingList, ApplicationDbContext DBContext)
-        {
-            var allEventMeals = new List<object>();
-
-            //var ingredientsInShoppingList = await DBContext.MealItemIngredients.Where( )
-        }
 
 
     }

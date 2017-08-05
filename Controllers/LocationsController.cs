@@ -198,7 +198,7 @@ namespace clean_aspnet_mvc.Controllers
         {
             var locations = await _context.Locations.SingleOrDefaultAsync(m => m.Id == id);
             _context.Locations.Remove(locations);
-            await base.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

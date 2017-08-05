@@ -8,8 +8,15 @@
         ViewData["MealItemId"]
 
     )
+     <div class="well">
+    For easier calculations you should use full measures and fractional quantities instead of fractional measures and full quantities.
+
+<br/>
+<br/>
+     Example: use <span class="label label-success">0.25 gallons</span> instead of <span class="label label-danger">1 quart</span>.
+    </div>
     <div class="form-horizontal">
-        <h4>MealItemIngredient</h4>
+
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
@@ -40,7 +47,5 @@
     </div>
 </form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 

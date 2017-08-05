@@ -26,6 +26,10 @@ namespace clean_aspnet_mvc.Controllers
             {
                 var currentUser = new CurrentLoggedInUser(this.HttpContext, _dbContext);
                 missingSteps = currentUser.GetMissingSteps();
+                if (missingSteps.Count() ==0)
+                {
+                    return RedirectToAction("ManageCurrent", "Locations");
+                }
             }
             return View(missingSteps);
         }

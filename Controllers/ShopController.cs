@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using clean_aspnet_mvc.Data;
+using clean_aspnet_mvc.Models.ShoppingViewModels;
 
 namespace clean_aspnet_mvc.Controllers
 {
@@ -30,7 +31,8 @@ namespace clean_aspnet_mvc.Controllers
         {
 
             var mealShoppingList = await base.GetLoggedInUser().CalculateShoppingList(selectedMealIds);
-            return View(mealShoppingList);
+            var model = new ShoppingListCalculationViewModel(mealShoppingList, base.GetLoggedInUser());
+            return View(model);
         }
 
 
