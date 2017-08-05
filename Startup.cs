@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using clean_aspnet_mvc.Data;
 using clean_aspnet_mvc.Models;
 using clean_aspnet_mvc.Services;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace clean_aspnet_mvc
 {
@@ -71,7 +72,10 @@ namespace clean_aspnet_mvc
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -6,8 +6,14 @@
 
 <div>
 
+@if(!User.Identity.IsAuthenticated)
+{
+  <h1>Menu Manager!</h1>
 
-@if (Model.Count > 0)
+ <h3>Please <a href="/Account/LogIn" >log in</a> or <a href="/Account/Register">register</a> to get started...</h3>
+}
+
+@if (User.Identity.IsAuthenticated && Model.Count > 0)
 {
   <div class="jumbotron">
   <h1>Welcome!</h1>
@@ -20,7 +26,6 @@
   At any point you can go to the "Configuration" section and modify your settings.
 
 </div>
-}
 
   @foreach(var missingStep in Model) {
     <div class="alert alert-info" role="alert">
@@ -34,7 +39,7 @@
 
 
   }
-
+}
 
 
 
