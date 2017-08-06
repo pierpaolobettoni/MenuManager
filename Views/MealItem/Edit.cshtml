@@ -5,6 +5,7 @@
 <form asp-action="Edit">
     <div class="form-horizontal">
         <h4>Edit Meal Item</h4>
+        <div class="alert alert-info">A meal item represents a recipe that is part of the menu of an event.</div>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
@@ -32,28 +33,23 @@
         </div>
         <div class="well">
 
-            How much of this meal item is needed to feed how many people?
+            This Recipe Yields
 
         </div>
-        <div class="form-group">
-            <label asp-for="Quantity" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="MeasureType" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="MeasureType" class="form-control" />
-                <span asp-validation-for="MeasureType" class="text-danger"></span>
-            </div>
-        </div>
+
+
         <div class="form-group">
             <label asp-for="NumberOfServings" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="NumberOfServings" class="form-control" />
                 <span asp-validation-for="NumberOfServings" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TypeOfServing" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="TypeOfServing" class="form-control" />
+                <span asp-validation-for="TypeOfServing" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">

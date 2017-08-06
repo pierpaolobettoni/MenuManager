@@ -1,6 +1,7 @@
-Accompaignment
+Accompaniment
 Beverage
-Dessert
 Condiment
-Salad
+Dessert
 Entree
+Salad
+

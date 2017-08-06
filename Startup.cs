@@ -57,12 +57,16 @@ namespace clean_aspnet_mvc
             services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
-        private static string GetConnectionstring()
+        private string GetConnectionstring()
         {
 
-            var defaultConnectionString = Environment.GetEnvironmentVariable("MENU_MANAGER_CONNECTION_STRING");
+            string defaultConnectionString;// = Environment.GetEnvironmentVariable("MENU_MANAGER_CONNECTION_STRING");
+            defaultConnectionString = Configuration.GetConnectionString("DefaultConnection");
+
             if (string.IsNullOrEmpty(defaultConnectionString))
+            {
                 throw new Exception("Missing environment variable: MENU_MANAGER_CONNECTION_STRING");
+            }
 
             return defaultConnectionString;
         }

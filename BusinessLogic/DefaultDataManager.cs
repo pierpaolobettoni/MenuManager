@@ -182,10 +182,9 @@ namespace clean_aspnet_mvc.BusinessLogic
                     var rowCells = thisRow.Split(',');
                     var name = rowCells[0].Trim();
                     var description = rowCells[1].Trim();
-                    var quantity = Decimal.Parse(rowCells[2].Trim());
-                    var measure = rowCells[3].Trim();
-                    var menuItemType = rowCells[4].Trim();
-                    var numberOfServings = int.Parse(rowCells[5].Trim());
+                    var typeOfServing = rowCells[2].Trim();
+                    var menuItemType = rowCells[3].Trim();
+                    var numberOfServings = int.Parse(rowCells[4].Trim());
                     var thisMenuItemType = menuItemTypes.Where(x => x.Name == menuItemType).FirstOrDefault();
                     if (thisMenuItemType == null)
 
@@ -197,8 +196,7 @@ namespace clean_aspnet_mvc.BusinessLogic
                             MealItemName = name,
                             MealItemDescription = description,
                             MenuItemTypeId = thisMenuItemType.Id,
-                            Quantity = quantity,
-                            MeasureType = measure,
+                            TypeOfServing = typeOfServing,
                             NumberOfServings = numberOfServings,
                             Location = _location
                         });
@@ -226,7 +224,7 @@ namespace clean_aspnet_mvc.BusinessLogic
 
                     var thisMealItem = allMealItems.Where(x => x.MealItemName == mealItemName).FirstOrDefault();
                     if (thisMealItem == null)
-                        throw new Exception("Can't find menu item type for " + thisMealItem);
+                        throw new Exception("Can't find menu meal item for " + mealItemName);
                     var thisGroceryItem = allGroceryItems.Where(x => x.GroceryItemName == groceryItemName).FirstOrDefault();
                     if (groceryItemName == null)
                         throw new Exception("Can't find grocoery item type for " + groceryItemName);

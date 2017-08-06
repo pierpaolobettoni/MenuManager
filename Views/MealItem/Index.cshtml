@@ -20,11 +20,9 @@
                     @Html.DisplayNameFor(model => model.MealItemDescription)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Quantity)
+                    @Html.DisplayNameFor(model => model.TypeOfServing)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MeasureType)
-                </th>
+
 
             <th></th>
         </tr>
@@ -42,11 +40,9 @@
                 @Html.DisplayFor(modelItem => item.MealItemDescription)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
+                @Html.DisplayFor(modelItem => item.TypeOfServing)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MeasureType)
-            </td>
+
 
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>  |

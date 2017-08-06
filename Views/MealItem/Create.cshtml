@@ -6,7 +6,7 @@
 <div class="alert alert-info">A meal item is any item that you might put in a dish, for example: potato salad.</div>
 <form asp-action="Create">
     <div class="form-horizontal">
-        <h4>MealItem</h4>
+
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
@@ -32,30 +32,25 @@
                 <span asp-validation-for="MenuItemTypeId" class="text-danger"></span>
             </div>
         </div>
-        <div class="well">
 
-            How much of this meal item is needed to feed how many people?
+<div class="well">
+
+            This recipe yields...
 
         </div>
-        <div class="form-group">
-            <label asp-for="Quantity" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="MeasureType" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="MeasureType" class="form-control" />
-                <span asp-validation-for="MeasureType" class="text-danger"></span>
-            </div>
-        </div>
+
         <div class="form-group">
             <label asp-for="NumberOfServings" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="NumberOfServings" class="form-control" />
                 <span asp-validation-for="NumberOfServings" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TypeOfServing" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="TypeOfServing" class="form-control" />
+                <span asp-validation-for="TypeOfServing" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">

@@ -1,20 +1,20 @@
-bacon, 1, stripe, Scrumbled Eggs
-eggs, 1, unit, Scrumbled Eggs
-pepper, 1, pinch, Scrumbled Eggs
-butter, 1, table spoon, Mashed Potatoes
-potatoes, 100, grams, Mashed Potatoes
-salt, 1, pinch, Mashed Potatoes
-bacon, 2, stripe, Carbonara
-spaghetti, 100, grams, Carbonara
-salt, 1, pinch, Carbonara
-whipped cream, 2, table spoon, Carbonara
-pasta, 100, grams, Puttanesca
-tomatoes, 1, unit, Puttanesca
-red pepper, 2, pinch, Puttanesca
-olives (black), 1, cup, Puttanesca
-olive oil, 2, table spoon, Puttanesca
-melons, 1, quarter, Mixed Fruit
-watermelon, 1, eight, Mixed Fruit
-apples, 1, half, Mixed Fruit
-grapes, 1, cup, Mixed Fruit
+bacon, 1, stripe,(Example) Scrumbled Eggs
+eggs, 1, unit,(Example) Scrumbled Eggs
+pepper, 1, pinch,(Example) Scrumbled Eggs
+butter, 1, table spoon,(Example) Mashed Potatoes
+potatoes, 100, grams,(Example) Mashed Potatoes
+salt, 1, pinch,(Example) Mashed Potatoes
+bacon, 2, stripe,(Example) Carbonara
+spaghetti, 100, grams,(Example) Carbonara
+salt, 1, pinch,(Example) Carbonara
+whipped cream, 2,table spoon,(Example) Carbonara
+pasta, 100, grams,(Example) Puttanesca
+tomatoes, 1, unit,(Example) Puttanesca
+red pepper, 2, pinch,(Example) Puttanesca
+olives (black), 1, cup,(Example) Puttanesca
+olive oil, 2, table spoon,(Example) Puttanesca
+melons, 1, quarter,(Example) Mixed Fruit
+watermelon, 1, eight,(Example) Mixed Fruit
+apples, 1, half,(Example) Mixed Fruit
+grapes, 1, cup,(Example) Mixed Fruit
 

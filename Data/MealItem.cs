@@ -18,10 +18,9 @@ namespace clean_aspnet_mvc.Data
         public string MealItemDescription { get; set; }
 
         [Required]
-        [Display(Name = "Quantity")]
-        public decimal Quantity { get; set; }
-        [Display(Name = "Measure Type")]
-        public string MeasureType { get; set; }
+
+        [Display(Name = "Type of Serving")]
+        public string TypeOfServing { get; set; }
 
         public ICollection<MealItemIngredient> Ingredients { get; set; }
 

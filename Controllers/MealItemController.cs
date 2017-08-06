@@ -55,7 +55,7 @@ namespace clean_aspnet_mvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,MealItemName,MealItemDescription,Quantity,MeasureType, MenuItemTypeId, NumberOfServings")] MealItem mealItem)
+        public async Task<IActionResult> Create([Bind("Id,MealItemName,MealItemDescription,TypeOfServing, MenuItemTypeId, NumberOfServings")] MealItem mealItem)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace clean_aspnet_mvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,MealItemName,MealItemDescription,Quantity,MeasureType, MenuItemTypeId, NumberOfServings")] MealItem mealItem)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,MealItemName,MealItemDescription, TypeOfServing, MenuItemTypeId, NumberOfServings")] MealItem mealItem)
         {
             if (id != mealItem.Id)
             {
