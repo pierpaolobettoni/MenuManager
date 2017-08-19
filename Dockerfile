@@ -1,5 +1,5 @@
 
-FROM microsoft/aspnetcore-build
+FROM microsoft/dotnet:1.1.2-sdk
 LABEL Name=menumanager Version=0.0.1
 ARG source=.
 WORKDIR /app
