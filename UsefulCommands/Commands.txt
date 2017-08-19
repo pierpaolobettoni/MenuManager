@@ -14,3 +14,10 @@ export MENU_MANAGER_CONNECTION_STRING='server=_REAL_DB_DNS_;user id=_REAL_USER_;
 
 // set
 export ASPNETCORE_ENVIRONMENT=development
+
+
+// kill all nginx processes
+sudo kill $(ps aux | grep '[n]ginx' | awk '{print $2}')
+
+// start nginx
+sudo nginx
