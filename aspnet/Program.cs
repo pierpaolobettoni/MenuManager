@@ -16,8 +16,8 @@ namespace clean_aspnet_mvc
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseSetting("detailedErrors", "true")
                 .UseIISIntegration()
+                .UseUrls("http://*:5000")
                 .UseStartup<Startup>()
-                .CaptureStartupErrors(true)
                 .Build();
 
             host.Run();
