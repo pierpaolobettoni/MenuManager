@@ -36,8 +36,11 @@
               (@if(User.Identity.IsAuthenticated)
               {
                 <ul class="nav navbar-nav">
+                   <li><a asp-area="" asp-controller="Event" asp-action="Index">Events</a></li>
+                          <li><a asp-area="" asp-controller="Menu" asp-action="Index">Menus</a></li>
+                          <li><a asp-area="" asp-controller="MealItem" asp-action="Index">Recipes</a></li>
                     <!-- <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li> -->
-                    <li role="presentation" class="dropdown">
+                    <!-- <li role="presentation" class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                           Plan <span class="caret"></span>
                         </a>
@@ -48,7 +51,7 @@
                          <li><a asp-area="" asp-controller='Locations' asp-action="ManageCurrent"> @ViewData["CurrentLocationName"] Lists</a></li>
 
                         </ul>
-                      </li>
+                      </li> -->
                     <li role="presentation" class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                           Shop <span class="caret"></span>

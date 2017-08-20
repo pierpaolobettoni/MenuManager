@@ -3,44 +3,30 @@
 <h3>
   Manage Events
 </h3>
-
+<a asp-action="Create" class="btn btn-success btn-xs" title="Create a new Event" align=left>
+  <span class="glyphicon glyphicon-plus" aria-hidden="true">
+  </span>
+</a>
 <p>
-    <a asp-action="Create">Create New</a>
+
 </p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.EventName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StartDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EndDate)
-                </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="panel panel-default">
+<ul class="list-group">
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                <h4>@Html.DisplayFor(modelItem => item.EventName)</h4>
-                @Html.DisplayFor(modelItem => item.EventDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+      <a asp-action="Edit" asp-route-id="@item.Id" class="list-group-item">
+        <p class="list-group-item-text">
+        <h4>@Html.DisplayFor(modelItem => item.EventName)</h4>
+
+        @Html.DisplayFor(modelItem => item.EventDescription)<br>
+         <span class="label label-default">
+           @Html.DisplayFor(modelItem => item.StartDate) -> @Html.DisplayFor(modelItem => item.EndDate)
+          </span>
+
+
+
+        </p>
+       </a>
 }
-    </tbody>
-</table>
+</ul>
+</div>
 
