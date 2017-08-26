@@ -22,7 +22,7 @@ namespace clean_aspnet_mvc.Controllers
         // GET: Menu
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Menus.ToListAsync());
+            return View(await GetLoggedInUser().GetMenus().ToListAsync());
         }
 
         // GET: Menu/Details/5

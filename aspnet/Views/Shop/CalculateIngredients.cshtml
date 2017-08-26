@@ -1,10 +1,10 @@
 @model IEnumerable<clean_aspnet_mvc.Data.Event>
 
-<h3>Select events</h3>
+<h3>Shopping List Calculator</h3>
 
 <form asp-action="CalculateIngredientsForMeals">
     <div class="form-horizontal">
-<div class="list-group-item list-group-item-info">Select the events that you want to be shopping for... <br/></div>
+<div class="list-group-item list-group-item-info">Select what you want to be shopping for... <br/></div>
   <div>
   @foreach(var thisEvent in Model)
   {
@@ -34,7 +34,7 @@
 
             <li class="list-group-item">
               <div class="checkbox">
-                <label><input type="checkbox" value=@thisMeal.Id name="selectedMealIds">@thisMeal.EventMealSlot.Name</label>
+                <label><input type="checkbox" value=@thisMeal.Id name="selectedMealIds">@thisMeal.Menu.Name (@thisMeal.EventMealSlot.Name)</label>
               </div>
               </li>
 

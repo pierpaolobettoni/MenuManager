@@ -9,16 +9,16 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
 
-            <div class="col-md-4">
+            <div class="col-xs-8">
 
                 @Html.DropDownList("MealItemId", new SelectList(ViewBag.MealItems, "Id", "FullName"), new { @class="form-control" })
 
             </div>
-            <div class="col-md-8">
+            <div class="col-md-4">
 
 <button asp-action="AddMealItem" type="submit" class="btn btn-default btn-sm pull-left" asp-route-id=@Model.Id>
               <div class="glyphicon glyphicon-plus"  aria-hidden="true" ></div>
-              Add meal item
+              Add recipy
     </button>
             </div>
         </div>

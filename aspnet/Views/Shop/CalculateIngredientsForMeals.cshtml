@@ -1,11 +1,18 @@
 @model clean_aspnet_mvc.Models.ShoppingViewModels.ShoppingListCalculationViewModel
 
-<h3>Shopping List Details</h3>
-
+<h4>Shopping List Details for </h4>
+<ul>
+  @foreach(var meal in ViewBag.Meals)
+  {
+    <li>
+      @meal.Event.EventName  @meal.Menu.Name (@meal.EventMealSlot.Name)
+    </li>
+  }
+</ul>
 <form asp-action="CalculateIngredientsForMeals">
     <div class="form-horizontal">
 
-<div class="list-group-item list-group-item-info">Consolidated Shopping List<br/></div>
+
 <table class="table">
    @{
      var previousCategory = "";
@@ -22,29 +29,36 @@
         mustRenderCategory = true;
       }
       howManyWithTheSameCategory = rows.Where( x=> x.CategoryName == thisRow.CategoryName && thisRow.GroceryItemName == thisRow.GroceryItemName).Count();
-      <tr>
+
         @if (mustRenderCategory)
         {
-          <td rowspan=@howManyWithTheSameCategory colspan="1">
-            @(thisRow.CategoryName != previousCategory ? thisRow.CategoryName : "")
-          </td>
+           <tr>
+              <td  >
+
+
+                  @(thisRow.CategoryName != previousCategory ? thisRow.CategoryName : "")
+
+              </td>
+              <td></td>
+              <td></td>
+           </tr>
         }
+         <tr>
+           <td></td>
           <td>
             @thisRow.GroceryItemName
           </td>
           <td>
             @thisRow.Quantity.ToString("#.##")  @thisRow.Measure
           </td>
-      </tr>
+        </tr>
       previousCategory = thisRow.CategoryName;
       previousGroceryItemName = thisRow.GroceryItemName;
       mustRenderCategory = false;
 
     }
 </table>
-<div class="well">
- <input type="submit" value="Continue >>" class="btn btn-success" />
- </div>
+
     </div>
 </form>
 

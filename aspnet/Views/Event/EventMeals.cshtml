@@ -5,15 +5,17 @@
   <div class="panel-heading">
     <h class="panel-title">Event meals</h3>
   </div>
+     <div class="panel-body">
     @if (ViewBag.Menus == null || ViewBag.Menus.Count == 0)
     {
-      <div class="panel-body">
+
         <div class="alert alert-info">You must <a class="btn btn-info" role="button" href="/Menu">create some menus</a> before you can add them to an event.
         </div>
-      </div>
+
 
     }
 
+ </div>
              @if (Model.Meals != null) {
 <table class="table">
   <thead>
@@ -69,8 +71,11 @@
 {
  @Html.Partial("AddEventMenu", Model)
 }
+ <div class="panel-body">
 
-
-
+<a asp-controller="shop" asp-action="calculateingredients" asp-route-id="@Model.Id"  class="btn btn-success" title="Create a new Event" align=left>
+   Calculate shopping list
+</a>
+ </div>
 </div>
 

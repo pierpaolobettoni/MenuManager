@@ -1,42 +1,20 @@
 @model IEnumerable<clean_aspnet_mvc.Data.MealItemIngredient>
 
 
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Quantity)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MeasureType)
-                </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GroceryItem)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MeasureType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GroceryItem.GroceryItemName)
-            </td>
-            <td>
-                <a asp-action="MealItemIngredientEdit" asp-route-id="@item.Id">Edit</a> |
 
-                <a asp-action="MealItemIngredientDelete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+<ul class="list-group">
+@foreach (var item in Model) {
+ <a asp-action="MealItemIngredientEdit" asp-route-id="@item.Id" class="list-group-item">
+        <p class="list-group-item-text">
+        <h4>   @Html.DisplayFor(modelItem => item.GroceryItem.GroceryItemName)
+     </h4>
+
+        @Html.DisplayFor(modelItem => item.Quantity) @Html.DisplayFor(modelItem => item.MeasureType)
+        </p>
+       </a>
 }
-    </tbody>
-</table>
+</ul>
+
 
 
 

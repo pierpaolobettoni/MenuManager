@@ -172,6 +172,15 @@ namespace clean_aspnet_mvc.Controllers
             return View(model);
         }
 
+        public IActionResult MealItemIngredientDelete(int id)
+        {
+            var model = (from ingredient in base.DBContext.MealItemIngredients where ingredient.Id == id && ingredient.Location == GetLoggedInUser().GetCurrentLocation() select ingredient).FirstOrDefault();
+            var mealItemId = model.MealItemId;
+            this._context.MealItemIngredients.Remove(model);
+            _context.SaveChanges(this.GetLoggedInUser().GetCurrentLocation());
+            return Redirect("/MealItem/Edit/" +  mealItemId);
+        }
+
         // POST: MealItemIngredient/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
