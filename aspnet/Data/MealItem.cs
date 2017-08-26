@@ -19,7 +19,7 @@ namespace clean_aspnet_mvc.Data
 
         [Required]
 
-        [Display(Name = "Type of Serving")]
+        [Display(Name = "Serving Size")]
         public string TypeOfServing { get; set; }
 
         public ICollection<MealItemIngredient> Ingredients { get; set; }

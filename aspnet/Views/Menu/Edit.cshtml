@@ -38,6 +38,13 @@
 
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to list of Menus</a>
 </div>
+<p>
+ <br/><br/>
+<a asp-action="delete" asp-route-id="@Model.Id"  class="btn btn-warning btn-xs" title="Create a new Event" align=left>
+   Delete this Menu
+</a>
+
+</p>
 

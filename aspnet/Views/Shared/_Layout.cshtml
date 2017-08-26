@@ -30,7 +30,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">@ViewData["CurrentLocationName"]</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Menu Manager</a>
             </div>
             <div class="navbar-collapse collapse">
               (@if(User.Identity.IsAuthenticated)
@@ -39,42 +39,7 @@
                    <li><a asp-area="" asp-controller="Event" asp-action="Index">Events</a></li>
                           <li><a asp-area="" asp-controller="Menu" asp-action="Index">Menus</a></li>
                           <li><a asp-area="" asp-controller="MealItem" asp-action="Index">Recipes</a></li>
-                    <!-- <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li> -->
-                    <!-- <li role="presentation" class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                          Plan <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                          <li><a asp-area="" asp-controller="Event" asp-action="Index">Events</a></li>
-                          <li><a asp-area="" asp-controller="Menu" asp-action="Index">Menus</a></li>
-                          <li><a asp-area="" asp-controller="MealItem" asp-action="Index">Meal Items</a></li>
-                         <li><a asp-area="" asp-controller='Locations' asp-action="ManageCurrent"> @ViewData["CurrentLocationName"] Lists</a></li>
 
-                        </ul>
-                      </li> -->
-                    <li role="presentation" class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                          Shop <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                          <li><a asp-area="" asp-controller="Shop" asp-action="CalculateIngredients">Calculate Ingredients</a></li>
-
-                        </ul>
-                      </li>
-                      <li role="presentation" class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                          Locations <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                          <li><a asp-area="" asp-controller="Locations" asp-action="Index">All Locations</a></li>
-
-
-
-
-
-
-                        </ul>
-                      </li>
 
 
 
@@ -90,6 +55,7 @@
     </nav>
     <div class="container">
       <br>
+
 
         @RenderBody()
         <hr />

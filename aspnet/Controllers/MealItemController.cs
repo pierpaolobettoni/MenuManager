@@ -131,7 +131,7 @@ namespace clean_aspnet_mvc.Controllers
             }
 
             var mealItem = await _context.MealItems
-                .SingleOrDefaultAsync(m => m.Id == id);
+                .SingleOrDefaultAsync(m => m.Id == id && m.Location == this.GetLoggedInUser().GetCurrentLocation());
             if (mealItem == null)
             {
                 return NotFound();
