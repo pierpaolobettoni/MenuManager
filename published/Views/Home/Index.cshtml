@@ -1,0 +1,46 @@
+﻿@model List<clean_aspnet_mvc.Models.EmptyAccountModels.MissingStep>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+
+@if(!User.Identity.IsAuthenticated)
+{
+  <h1>Menu Manager</h1>
+
+ <h3>Please <a href="/Account/LogIn" >log in</a> or <a href="/Account/Register">register</a> to get started...</h3>
+}
+
+@if (User.Identity.IsAuthenticated && Model.Count > 0)
+{
+  <div class="jumbotron">
+  <h1>Welcome!</h1>
+  <p>Seems like you are new here... lets get you started...</p>
+
+  <p>To get you up an running we have to start by setting up the system with a few things. We will walk through a few items. </p>
+
+  <h2>Come back to the home page every time you want to setup more.</h2>
+
+  At any point you can go to the "Configuration" section and modify your settings.
+
+</div>
+
+  @foreach(var missingStep in Model) {
+    <div class="alert alert-info" role="alert">
+      @missingStep.Name
+
+      <button type="button" class="btn btn-default">
+        <a href=@missingStep.RedirectToUrl >let's fix that...</a>
+      </button>
+
+    </div>
+
+
+  }
+}
+
+
+
+</div>

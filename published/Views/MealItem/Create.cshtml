@@ -1,0 +1,68 @@
+@model clean_aspnet_mvc.Data.MealItem
+
+
+
+<h3>Create a Recipe </h3>
+<div class="alert alert-info">An ingredient is any item that you might put in a dish, for example: potato salad.</div>
+<form asp-action="Create">
+    <div class="form-horizontal">
+
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="MealItemName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="MealItemName" class="form-control" />
+                <span asp-validation-for="MealItemName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="MealItemDescription" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                    <textarea rows="3" class="form-control" asp-for="MealItemDescription"></textarea>
+
+
+                <span asp-validation-for="MealItemDescription" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="MenuItemTypeId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                @Html.EditorFor(x => x.MenuItemTypeId)
+                <span asp-validation-for="MenuItemTypeId" class="text-danger"></span>
+            </div>
+        </div>
+
+<div class="well">
+
+            This recipe yields...
+
+        </div>
+
+        <div class="form-group">
+            <label asp-for="NumberOfServings" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="NumberOfServings" class="form-control" />
+                <span asp-validation-for="NumberOfServings" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TypeOfServing" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="TypeOfServing" class="form-control" />
+                <span asp-validation-for="TypeOfServing" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+

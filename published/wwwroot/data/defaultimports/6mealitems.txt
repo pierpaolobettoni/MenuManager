@@ -1,0 +1,7 @@
+
+(Example) Scrumbled Eggs, Scrumbled eggs with some pepper in it, One Spoonful, Entree, 1
+(Example) Cooked Bacon, Some bacon to go with the eggs, one cup, Accompaniment, 1
+(Example) Mashed Potatoes, Mashed potatoes, 2 cups, Accompaniment, 2
+(Example) Carbonara, Spaghetti alla carbonara, 2 spaghetti spoons, Entree, 2
+(Example) Puttanesca, Penne alla puttanesca, One plate, Entree, 4
+(Example) Mixed Fruit, Mix of seasonal fruits, thres cup, Dessert, 3
