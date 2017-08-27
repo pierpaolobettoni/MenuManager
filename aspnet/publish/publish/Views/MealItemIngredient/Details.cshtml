@@ -1,0 +1,33 @@
+@model MealItemIngredient
+
+
+
+<div>
+    <h4>MealItemIngredient</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MeasureType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MeasureType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GroceryItem)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GroceryItem.GroceryItemName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+

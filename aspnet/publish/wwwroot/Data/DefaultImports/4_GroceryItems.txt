@@ -1,0 +1,225 @@
+apples	, Fruits
+apricots	, Fruits
+avocados	, Fruits
+bananas	, Fruits
+berries	, Fruits
+cherries	, Fruits
+grapefruit	, Fruits
+grapes	, Fruits
+kiwi	, Fruits
+lemons	, Fruits
+limes	, Fruits
+melons	, Fruits
+nectarines	, Fruits
+oranges	, Fruits
+papaya	, Fruits
+peaches	, Fruits
+pears	, Fruits
+plums	, Fruits
+pomegranate	, Fruits
+watermelon	, Fruits
+artichokes	, Vegetables
+asparagus	, Vegetables
+basil	, Vegetables
+beets	, Vegetables
+broccoli	, Vegetables
+cabbage	, Vegetables
+cauliflower	, Vegetables
+carrots	, Vegetables
+celery	, Vegetables
+chiles	, Vegetables
+chives	, Vegetables
+cilantro	, Vegetables
+corn	, Vegetables
+cucumbers	, Vegetables
+eggplant	, Vegetables
+garlic cloves	, Vegetables
+green onions	, Vegetables
+lettuce	, Vegetables
+onions	, Vegetables
+peppers	, Vegetables
+potatoes	, Vegetables
+salad greens	, Vegetables
+spinach	, Vegetables
+sprouts	, Vegetables
+squash	, Vegetables
+tomatoes	, Vegetables
+zucchini	, Vegetables
+bacon	, Fresh and Deli Meats
+chicken	, Fresh and Deli Meats
+deli meat	, Fresh and Deli Meats
+ground beef	, Fresh and Deli Meats
+ground turkey	, Fresh and Deli Meats
+ham	, Fresh and Deli Meats
+hot dogs	, Fresh and Deli Meats
+pork	, Fresh and Deli Meats
+sausage	, Fresh and Deli Meats
+steak	, Fresh and Deli Meats
+turkey	, Fresh and Deli Meats
+catfish	, Seafood and Fish
+cod	, Seafood and Fish
+crab	, Seafood and Fish
+halibut	, Seafood and Fish
+lobster	, Seafood and Fish
+oysters	, Seafood and Fish
+salmon	, Seafood and Fish
+shrimp	, Seafood and Fish
+tilapia	, Seafood and Fish
+tuna	, Seafood and Fish
+candy	, Snack Foods
+cookies	, Snack Foods
+crackers	, Snack Foods
+dried fruit	, Snack Foods
+fruit snacks	, Snack Foods
+gelatin	, Snack Foods
+graham crackers	, Snack Foods
+granola bars	, Snack Foods
+gum	, Snack Foods
+nuts	, Snack Foods
+popcorn	, Snack Foods
+potato chips	, Snack Foods
+pretzels	, Snack Foods
+pudding	, Snack Foods
+raisins	, Snack Foods
+seeds	, Snack Foods
+tortilla chips	, Snack Foods
+baking powder	, Baking Essentials
+baking soda	, Baking Essentials
+bread crumbs	, Baking Essentials
+cake decor	, Baking Essentials
+cake mix	, Baking Essentials
+canned milk	, Baking Essentials
+chocolate chips	, Baking Essentials
+cocoa	, Baking Essentials
+cornmeal	, Baking Essentials
+cornstarch	, Baking Essentials
+flour	, Baking Essentials
+food coloring	, Baking Essentials
+frosting	, Baking Essentials
+muffin mix	, Baking Essentials
+pie crust	, Baking Essentials
+shortening	, Baking Essentials
+sugar (brown)	, Baking Essentials
+sugar (powdered)	, Baking Essentials
+sugar (granulated)	, Baking Essentials
+vanilla extract	, Baking Essentials
+bagels	, Bakery Pastries and Breads
+bread	, Bakery Pastries and Breads
+donuts	, Bakery Pastries and Breads
+cake	, Bakery Pastries and Breads
+cookies	, Bakery Pastries and Breads
+croutons	, Bakery Pastries and Breads
+dinner rolls	, Bakery Pastries and Breads
+hamburger buns	, Bakery Pastries and Breads
+hot dog buns	, Bakery Pastries and Breads
+muffins	, Bakery Pastries and Breads
+pastries	, Bakery Pastries and Breads
+pie	, Bakery Pastries and Breads
+pita bread	, Bakery Pastries and Breads
+tortillas (corn)	, Bakery Pastries and Breads
+tortillas (flour)	, Bakery Pastries and Breads
+applesauce	, Canned and Jarred Goods
+baked beans	, Canned and Jarred Goods
+black beans	, Canned and Jarred Goods
+broth	, Canned and Jarred Goods
+bullion cubes	, Canned and Jarred Goods
+canned fruit	, Canned and Jarred Goods
+canned vegetables	, Canned and Jarred Goods
+carrots	, Canned and Jarred Goods
+chili	, Canned and Jarred Goods
+corn	, Canned and Jarred Goods
+creamed corn	, Canned and Jarred Goods
+jam/jelly	, Canned and Jarred Goods
+mushrooms	, Canned and Jarred Goods
+olives (green)	, Canned and Jarred Goods
+olives (black)	, Canned and Jarred Goods
+pasta	, Canned and Jarred Goods
+pasta sauce	, Canned and Jarred Goods
+peanut butter	, Canned and Jarred Goods
+pickles	, Canned and Jarred Goods
+pie filling	, Canned and Jarred Goods
+soup	, Canned and Jarred Goods
+biscuits	, Dairy Products
+butter	, Dairy Products
+cheddar cheese	, Dairy Products
+cream	, Dairy Products
+cream cheese	, Dairy Products
+dip	, Dairy Products
+eggs	, Dairy Products
+egg substitute	, Dairy Products
+feta cheese	, Dairy Products
+half & half	, Dairy Products
+jack cheese	, Dairy Products
+milk	, Dairy Products
+mozarella	, Dairy Products
+processed cheese	, Dairy Products
+salsa	, Dairy Products
+shredded cheese	, Dairy Products
+sour cream	, Dairy Products
+swiss cheese	, Dairy Products
+whipped cream	, Dairy Products
+yogurt	, Dairy Products
+brown rice	, Pastas and Rice
+burger helper	, Pastas and Rice
+couscous	, Pastas and Rice
+elbow macaroni	, Pastas and Rice
+lasagna	, Pastas and Rice
+mac & cheese	, Pastas and Rice
+noodle mix	, Pastas and Rice
+rice mix	, Pastas and Rice
+spaghetti	, Pastas and Rice
+white rice	, Pastas and Rice
+bbq sauce	, Condiments and Sauces
+catsup	, Condiments and Sauces
+cocktail sauce	, Condiments and Sauces
+cooking spray	, Condiments and Sauces
+honey	, Condiments and Sauces
+horseradish	, Condiments and Sauces
+hot sauce	, Condiments and Sauces
+lemon juice	, Condiments and Sauces
+mayonnaise	, Condiments and Sauces
+mustard	, Condiments and Sauces
+olive oil	, Condiments and Sauces
+relish	, Condiments and Sauces
+salad dressing	, Condiments and Sauces
+salsa	, Condiments and Sauces
+soy sauce	, Condiments and Sauces
+steak sauce	, Condiments and Sauces
+sweet & sour	, Condiments and Sauces
+teriyaki	, Condiments and Sauces
+vegetable oil	, Condiments and Sauces
+vinegar	, Condiments and Sauces
+beer	, Beverages
+champagne	, Beverages
+club soda	, Beverages
+coffee	, Beverages
+diet soft drinks	, Beverages
+energy drinks	, Beverages
+juice	, Beverages
+liquor	, Beverages
+soft drinks	, Beverages
+tea	, Beverages
+wine	, Beverages
+basil	, Spices and Seasonins
+bay leaves	, Spices and Seasonins
+bbq seasoning	, Spices and Seasonins
+cinnamon	, Spices and Seasonins
+cloves	, Spices and Seasonins
+cumin	, Spices and Seasonins
+curry	, Spices and Seasonins
+dill	, Spices and Seasonins
+garlic powder	, Spices and Seasonins
+garlic salt	, Spices and Seasonins
+gravy mix	, Spices and Seasonins
+Italian seasoning	, Spices and Seasonins
+marinade	, Spices and Seasonins
+meat tenderizer	, Spices and Seasonins
+oregano	, Spices and Seasonins
+paprika	, Spices and Seasonins
+pepper	, Spices and Seasonins
+poppy seed	, Spices and Seasonins
+red pepper	, Spices and Seasonins
+sage	, Spices and Seasonins
+salt	, Spices and Seasonins
+seasoned salt	, Spices and Seasonins
+soup mix	, Spices and Seasonins

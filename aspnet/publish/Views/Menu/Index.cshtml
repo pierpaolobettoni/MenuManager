@@ -1,0 +1,27 @@
+@model IEnumerable<clean_aspnet_mvc.Data.Menu>
+
+<h3>Manage Menus</h3>
+<a asp-action="Create" class="btn btn-success btn-xs" title="Create a new Event" align=left>
+  <span class="glyphicon glyphicon-plus" aria-hidden="true">
+  </span>
+   Add a Menu
+</a>
+<p>
+
+</p>
+<div class="panel panel-default">
+<ul class="list-group">
+@foreach (var item in Model) {
+  <a asp-action="Edit" asp-route-id="@item.Id" class="list-group-item">
+        <p class="list-group-item-text">
+        <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
+
+
+
+
+        </p>
+       </a>
+
+}
+</ul>
+</div>
