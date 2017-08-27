@@ -17,4 +17,3 @@ melons, 1, quarter,(Example) Mixed Fruit
 watermelon, 1, eight,(Example) Mixed Fruit
 apples, 1, half,(Example) Mixed Fruit
 grapes, 1, cup,(Example) Mixed Fruit
-

@@ -1,0 +1,37 @@
+@model clean_aspnet_mvc.Data.GroceryItem
+
+
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>Edit Grocery Item</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label asp-for="GroceryItemName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="GroceryItemName" class="form-control" />
+                <span asp-validation-for="GroceryItemName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="GroceryCategoryId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GroceryCategoryId)
+                <span asp-validation-for="GroceryItemName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+

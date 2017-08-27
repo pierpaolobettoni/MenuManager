@@ -1,0 +1,65 @@
+@model clean_aspnet_mvc.Models.ShoppingViewModels.ShoppingListCalculationViewModel
+
+<h4>Shopping List Details for </h4>
+<ul>
+  @foreach(var meal in ViewBag.Meals)
+  {
+    <li>
+      @meal.Event.EventName  @meal.Menu.Name (@meal.EventMealSlot.Name)
+    </li>
+  }
+</ul>
+<form asp-action="CalculateIngredientsForMeals">
+    <div class="form-horizontal">
+
+
+<table class="table">
+   @{
+     var previousCategory = "";
+     var previousGroceryItemName = "";
+     var rows = Model.GetConsolidatedShoppingListRows().OrderBy(x => x.CategoryName).ThenBy( x => x.GroceryItemName).ToList();
+     var howManyWithTheSameCategory = 0;
+     var mustRenderCategory = true;
+   }
+
+   @foreach(var thisRow in rows)
+    {
+      if (previousCategory!= thisRow.CategoryName)
+      {
+        mustRenderCategory = true;
+      }
+      howManyWithTheSameCategory = rows.Where( x=> x.CategoryName == thisRow.CategoryName && thisRow.GroceryItemName == thisRow.GroceryItemName).Count();
+
+        @if (mustRenderCategory)
+        {
+           <tr>
+              <td  >
+
+
+                  @(thisRow.CategoryName != previousCategory ? thisRow.CategoryName : "")
+
+              </td>
+              <td></td>
+              <td></td>
+           </tr>
+        }
+         <tr>
+           <td></td>
+          <td>
+            @thisRow.GroceryItemName
+          </td>
+          <td>
+            @thisRow.Quantity.ToString("#.##")  @thisRow.Measure
+          </td>
+        </tr>
+      previousCategory = thisRow.CategoryName;
+      previousGroceryItemName = thisRow.GroceryItemName;
+      mustRenderCategory = false;
+
+    }
+</table>
+
+    </div>
+</form>
+
+
