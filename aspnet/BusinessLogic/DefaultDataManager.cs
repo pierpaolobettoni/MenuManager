@@ -103,7 +103,7 @@ namespace clean_aspnet_mvc.BusinessLogic
 
         private void PrefillEventTypes()
         {
-            var eventTypes = GetTxtFile("1_EventTypes.txt");
+            var eventTypes = GetTxtFile("1eventtypes.txt");
             foreach (string eventType in eventTypes)
             {
                 _currentUser.DBContext.EventTypes.Add(new EventType() { EventTypeName = eventType, Location = _location });
@@ -112,7 +112,7 @@ namespace clean_aspnet_mvc.BusinessLogic
         }
         private void PrefillGroceryCategory()
         {
-            var categories = GetTxtFile("2_GroceryCategory.txt");
+            var categories = GetTxtFile("2grocerycategory.txt");
             foreach (string category in categories)
             {
                 _currentUser.DBContext.GroceryCategory.Add(new GroceryCategory() { GroceryCategoryName = category, Location = _location });
@@ -121,7 +121,7 @@ namespace clean_aspnet_mvc.BusinessLogic
         }
         private void PrefillMealSlots()
         {
-            var slots = GetTxtFile("3_MealSlotTypes.txt");
+            var slots = GetTxtFile("3mealslottypes.txt");
             foreach (string slot in slots)
             {
                 _currentUser.DBContext.EventMealSlotTypes.Add(new EventMealSlotType() { Name = slot, Location = _location });
@@ -132,7 +132,7 @@ namespace clean_aspnet_mvc.BusinessLogic
         private void PrefillGroceryItems()
         {
             var categories = _currentUser.DBContext.GroceryCategory.Where(x => x.Location == _location).ToList();
-            var rows = GetTxtFile("4_GroceryItems.txt");
+            var rows = GetTxtFile("4groceryitems.txt");
             foreach (string thisRow in rows)
             {
                 var rowCells = thisRow.Split(',');
@@ -162,7 +162,7 @@ namespace clean_aspnet_mvc.BusinessLogic
 
         private void PrefillMenuItemTypes()
         {
-            var rows = GetTxtFile("5_MealItemTypes.txt");
+            var rows = GetTxtFile("5mealitemtypes.txt");
             foreach (string thisRow in rows)
             {
                 _currentUser.DBContext.MenuItemType.Add(new MenuItemType() { Name = thisRow, Location = _location });
@@ -174,7 +174,7 @@ namespace clean_aspnet_mvc.BusinessLogic
         {
             var menuItemTypes = _currentUser.DBContext.MenuItemTypes.Where(x => x.Location == _location).ToList();
 
-            var rows = GetTxtFile("6_MealItems.txt");
+            var rows = GetTxtFile("6mealitems.txt");
             foreach (string thisRow in rows)
             {
                 if (!string.IsNullOrEmpty(thisRow))
@@ -210,7 +210,7 @@ namespace clean_aspnet_mvc.BusinessLogic
             var allMealItems = _currentUser.DBContext.MealItems.Where(x => x.Location == _location).ToList();
             var allGroceryItems = _currentUser.DBContext.GroceryItems.Where(x => x.Location == _location).ToList();
 
-            var rows = GetTxtFile("7_MealItemIngredients.txt");
+            var rows = GetTxtFile("7mealitemingredients.txt");
             foreach (string thisRow in rows)
             {
                 if (!string.IsNullOrEmpty(thisRow))
@@ -244,7 +244,7 @@ namespace clean_aspnet_mvc.BusinessLogic
 
         private string[] GetTxtFile(string fileName)
         {
-            string localPath = Path.Combine(_evironment.WebRootPath, @"data/DefaultImports/" + fileName);
+            string localPath = Path.Combine(_evironment.WebRootPath, @"data/defaultimports/" + fileName);
             return File.ReadAllLines(localPath);
         }
 

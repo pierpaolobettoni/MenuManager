@@ -1,6 +1,7 @@
 dotnet restore
 dotnet build
+rm -r ./publish
 dotnet publish -o ./publish
-docker build --no-cache -t menumanager .
+
 
 
