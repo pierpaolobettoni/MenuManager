@@ -1,5 +1,5 @@
 
-FROM microsoft/dotnet:1.1.2-sdk
+FROM microsoft/dotnet:1.1.2-runtime
 
 LABEL Name=menumanager
 
