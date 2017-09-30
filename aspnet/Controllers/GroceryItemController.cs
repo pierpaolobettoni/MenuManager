@@ -83,7 +83,7 @@ namespace clean_aspnet_mvc.Controllers
             {
                 return NotFound();
             }
-            return View(groceryItem);
+             return View(groceryItem);
         }
 
         // POST: GroceryItem/Edit/5
@@ -136,6 +136,7 @@ namespace clean_aspnet_mvc.Controllers
             {
                 return NotFound();
             }
+            ViewBag.UsedByMealItems = _context.MealItemIngredients.Include( x => x.MealItem).Where( x => x.GroceryItemId == groceryItem.Id).Select(x => x.MealItem).ToList();
 
             return View(groceryItem);
         }

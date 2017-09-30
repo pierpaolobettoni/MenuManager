@@ -1,11 +1,12 @@
-@model GroceryItem
+@model clean_aspnet_mvc.Data.GroceryItem
+
+@{
+  bool canDelete = ViewBag.UsedByMealItems.Count == 0;
+}
 
 
-
-<h3>Are you sure you want to delete this?</h3>
-<p class="alert alert-danger" role="alert">You should note delete this unless you know what you are doing.</p>
 <div>
-    <h4>GroceryItem</h4>
+    <h4>Ingredient / Grocery Item Confirm Delete</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -15,6 +16,7 @@
             @Html.DisplayFor(model => model.GroceryItemName)
         </dd>
     </dl>
+@if (canDelete) {
 
     <form asp-action="Delete">
         <div class="form-actions no-color">
@@ -22,6 +24,24 @@
             <a asp-action="Index">Back to List</a>
         </div>
     </form>
+} else {
+<div class="alert alert-warning">Cannot delete used ingredients.</div>
+<div class="panel panel-default">
+  <div class="panel-heading">Recipes using this ingredient
+
+  </div>
+    <ul class="list-group">
+
+    @foreach(var mealItem in ViewBag.UsedByMealItems)
+    { var editUrl = "/MealItem/Edit/" + @mealItem.Id;
+      <li class="list-group-item"><a href=@editUrl >@mealItem.MealItemName</a></li>
+    }
+    </ul>
+</div>
+
+
+
+}
 </div>
 </body>
 </html>

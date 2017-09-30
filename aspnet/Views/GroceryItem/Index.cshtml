@@ -16,7 +16,7 @@
                 <th data-column-id="Category">
                     @Html.DisplayNameFor(model => model.GroceryCategory)
                 </th>
-            <th  >link</th>
+            <th  data-column-id="link" data-formatter="link" data-sortable="false"></th>
         </tr>
     </thead>
     <tbody>
@@ -32,7 +32,7 @@
                 @Html.DisplayFor(modelItem => item.GroceryCategory.GroceryCategoryName)
             </td>
             <td >
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+
             </td>
         </tr>
 }
@@ -42,7 +42,14 @@
 $("#grid-basic").bootgrid(
   {
     caseSensitive: false,
-    rowCount: [25, 50, 100, -1]
+    rowCount: [25, 50, 100, -1],
+    formatters: {
+        "link": function(column, row)
+        {
+          console.log("row " + row);
+            return "<a href='/GroceryItem/edit/" + row.Id+ "'>Edit</a> ";
+        }
+    }
 
   }
 );
